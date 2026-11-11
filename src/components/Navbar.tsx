@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Menu, X, Sun, Moon, Sparkles, Volume2, VolumeX, ArrowUpRight, Search, Bot } from 'lucide-react';
 import { personalInfo } from '../data/portfolio';
 import { CommandPalette } from './CommandPalette';
+import { Logo } from './Logo';
 
 interface NavbarProps {
   isDark: boolean;
@@ -83,12 +84,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               className="flex items-center gap-2.5 group focus:outline-none"
               title="Rakesh Kumar Mondal"
             >
-              {/* Circular Glowing Monogram Pod */}
-              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-cyan-500 via-blue-600 to-indigo-600 p-[1.5px] shrink-0 shadow-sm shadow-cyan-500/25 group-hover:scale-105 transition-transform">
-                <div className="w-full h-full rounded-full bg-zinc-950 flex items-center justify-center font-heading font-extrabold text-[10px] text-cyan-300 tracking-wider">
-                  RKM
-                </div>
-              </div>
+              {/* Representative Emblem Mark */}
+              <Logo size="sm" variant="icon" />
 
               {/* Name Lockup: Rakesh Kumar Mondal */}
               <div className="hidden sm:flex flex-col leading-tight">

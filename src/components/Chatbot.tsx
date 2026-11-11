@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
-import { MessageSquare, X, Send, Bot, User, Sparkles, RotateCcw, Move, Compass } from 'lucide-react';
+import { MessageSquare, X, Send, Bot, User, RotateCcw, Compass, Mic, Volume2, VolumeX } from 'lucide-react';
 import { quickQuestions } from '../data/chatbotResponses';
 import { getChatbotResponse } from '../utils/chatbotEngine';
 import { RexRobot } from './RexRobot';
+import { rexVoice } from '../utils/rexVoice';
+import { MarkdownMessage } from './MarkdownMessage';
 
 interface Message {
   id: string;
@@ -17,12 +19,15 @@ export const Chatbot: React.FC = () => {
     {
       id: 'welcome',
       sender: 'rex',
-      text: "Hi there! I'm Rex, Rakesh's AI companion. I can answer questions about his BCA coursework, Python & automation projects, cybersecurity tools, and technical skills. You can also drag me anywhere across your screen! How can I help you today?",
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      text: "Hello! I'm Rex, Rakesh's companion. What would you like to explore today? Ask me about projects, skills, coding, or just say hello!",
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     }
   ]);
   const [inputText, setInputText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [isListening, setIsListening] = useState(false);
+  const [voiceEnabled, setVoiceEnabled] = useState(true);
+  const [speakingMessageId, setSpeakingMessageId] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   // Freeform dragging state
@@ -72,9 +77,8 @@ export const Chatbot: React.FC = () => {
     return () => window.removeEventListener('open-rex-chat', handleOpenChat);
   }, []);
 
-  // Pointer dragging handlers (handles Mouse, Touch, and Pen)
+  // Pointer dragging handlers
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    // Only primary click
     if (e.button !== 0 && e.pointerType === 'mouse') return;
 
     const currentPos = position || {
@@ -100,7 +104,6 @@ export const Chatbot: React.FC = () => {
         dragRef.current.hasMoved = true;
       }
 
-      // Constrain within viewport boundaries
       const nextX = Math.max(12, Math.min(window.innerWidth - 96, dragRef.current.originX + dx));
       const nextY = Math.max(12, Math.min(window.innerHeight - 116, dragRef.current.originY + dy));
 
@@ -112,7 +115,6 @@ export const Chatbot: React.FC = () => {
       window.removeEventListener('pointermove', handlePointerMove);
       window.removeEventListener('pointerup', handlePointerUp);
 
-      // Only toggle chat if user clicked without dragging
       if (!dragRef.current.hasMoved) {
         setIsOpen((prev) => !prev);
       }
@@ -130,6 +132,20 @@ export const Chatbot: React.FC = () => {
     });
   };
 
+  const handleSpeakMessage = (msgId: string, text: string) => {
+    if (speakingMessageId === msgId) {
+      rexVoice.stopSpeaking();
+      setSpeakingMessageId(null);
+      return;
+    }
+
+    setSpeakingMessageId(msgId);
+    rexVoice.speak(text, {
+      onEnd: () => setSpeakingMessageId(null),
+    });
+  };
+
+  // 100% Client-Side Chat Engine without external API dependencies
   const handleSendMessage = (textToSend?: string) => {
     const query = textToSend || inputText;
     if (!query.trim()) return;
@@ -145,32 +161,67 @@ export const Chatbot: React.FC = () => {
     if (!textToSend) setInputText('');
     setIsTyping(true);
 
-    // Realistic typing latency without external APIs
     setTimeout(() => {
-      const reply = getChatbotResponse(query);
+      const reply = getChatbotResponse(query.trim());
+      const botMessageId = `rex-${Date.now()}`;
       const botMessage: Message = {
-        id: `rex-${Date.now()}`,
+        id: botMessageId,
         sender: 'rex',
         text: reply,
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
+
       setMessages(prev => [...prev, botMessage]);
       setIsTyping(false);
-    }, 450);
+
+      if (voiceEnabled) {
+        setSpeakingMessageId(botMessageId);
+        rexVoice.speak(reply, {
+          onEnd: () => setSpeakingMessageId(null),
+        });
+      }
+    }, 280);
+  };
+
+  // Mic voice input button in chat
+  const handleToggleMic = () => {
+    if (isListening) {
+      setIsListening(false);
+      return;
+    }
+
+    rexVoice.stopSpeaking();
+    setSpeakingMessageId(null);
+
+    rexVoice.startListening(
+      (transcript) => {
+        setIsListening(false);
+        setInputText(transcript);
+        handleSendMessage(transcript);
+      },
+      (listeningState) => {
+        setIsListening(listeningState);
+      },
+      () => {
+        setIsListening(false);
+      }
+    );
   };
 
   const resetChat = () => {
+    rexVoice.stopSpeaking();
+    setSpeakingMessageId(null);
     setMessages([
       {
         id: 'welcome-reset',
         sender: 'rex',
-        text: "Conversation reset! What would you like to know from Rex about Rakesh's work, skills, or projects?",
-        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        text: "Conversation reset! What would you like to explore with Rex?",
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       }
     ]);
   };
 
-  // Compute smart positioning for chat window so it floats comfortably beside Rex
+  // Dynamic chat positioning
   const chatCoords = useMemo(() => {
     if (!position) return { left: undefined, top: undefined, right: '24px', bottom: '110px' };
 
@@ -178,18 +229,15 @@ export const Chatbot: React.FC = () => {
     const chatHeight = Math.min(540, window.innerHeight - 80);
 
     let left = position.x - chatWidth + 80;
-    // If overflowing on left, place on right of Rex
     if (left < 16) {
       left = Math.min(position.x, window.innerWidth - chatWidth - 16);
     }
-    // If overflowing right
     if (left + chatWidth > window.innerWidth - 16) {
       left = window.innerWidth - chatWidth - 16;
     }
     left = Math.max(12, left);
 
     let top = position.y - chatHeight - 14;
-    // If overflowing above, place below Rex
     if (top < 16) {
       top = Math.min(position.y + 110, window.innerHeight - chatHeight - 16);
     }
@@ -205,7 +253,7 @@ export const Chatbot: React.FC = () => {
 
   return (
     <>
-      {/* Chat Window: dynamically placed near Rex */}
+      {/* Chat Window */}
       {isOpen && (
         <div
           style={{
@@ -214,51 +262,62 @@ export const Chatbot: React.FC = () => {
             top: chatCoords.top,
             right: chatCoords.right,
             bottom: chatCoords.bottom,
-            width: 'min(420px, 92vw)',
+            width: 'min(420px, 94vw)',
             height: 'min(540px, 80vh)',
             zIndex: 60,
           }}
           className="flex flex-col bg-white dark:bg-[#0c1222] border border-cyan-500/30 rounded-2xl shadow-2xl shadow-cyan-950/90 overflow-hidden animate-in fade-in slide-in-from-bottom-3 transition-all"
         >
-          {/* Header */}
-          <div className="px-5 py-4 bg-zinc-950 text-white flex items-center justify-between border-b border-cyan-500/20">
+          {/* Clean Minimalist Header (Targeted Elements Removed) */}
+          <div className="px-5 py-3.5 bg-zinc-950 text-white flex items-center justify-between border-b border-cyan-500/20">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-400 p-[1.5px] shadow-md shadow-cyan-500/25 flex items-center justify-center">
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 via-indigo-600 to-cyan-400 p-[1.5px] shadow-md shadow-cyan-500/25 flex items-center justify-center">
                 <div className="w-full h-full bg-zinc-950 rounded-[10px] flex items-center justify-center text-cyan-400">
                   <Bot className="w-5 h-5" />
                 </div>
               </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <h3 className="font-heading font-semibold text-sm tracking-wide text-white">Rex</h3>
-                  <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 flex items-center gap-1 font-semibold">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    AI Companion
-                  </span>
-                </div>
-                <p className="text-[11px] text-zinc-400 font-mono">Draggable Virtual Assistant</p>
+
+              {/* Clean Rex Title without badge pill or subtitle */}
+              <div className="flex items-center gap-2">
+                <h3 className="font-heading font-semibold text-sm tracking-wide text-white">Rex</h3>
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" title="Rex Online" />
               </div>
             </div>
 
             <div className="flex items-center gap-1">
+              {/* Voice Readout Mute/Unmute */}
+              <button
+                onClick={() => {
+                  const next = !voiceEnabled;
+                  setVoiceEnabled(next);
+                  if (!next) rexVoice.stopSpeaking();
+                }}
+                title={voiceEnabled ? 'Mute Rex voice readout' : 'Enable Rex voice readout'}
+                className="p-1.5 text-zinc-400 hover:text-cyan-400 rounded-lg hover:bg-zinc-800 transition-colors cursor-pointer"
+              >
+                {voiceEnabled ? <Volume2 className="w-4 h-4 text-cyan-400" /> : <VolumeX className="w-4 h-4 text-zinc-500" />}
+              </button>
               <button
                 onClick={resetRexPosition}
                 title="Reset Rex to corner"
-                className="p-1.5 text-zinc-400 hover:text-cyan-400 rounded-lg hover:bg-zinc-800 transition-colors"
+                className="p-1.5 text-zinc-400 hover:text-cyan-400 rounded-lg hover:bg-zinc-800 transition-colors cursor-pointer"
               >
                 <Compass className="w-4 h-4" />
               </button>
               <button
                 onClick={resetChat}
                 title="Reset conversation"
-                className="p-1.5 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800 transition-colors"
+                className="p-1.5 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800 transition-colors cursor-pointer"
               >
                 <RotateCcw className="w-4 h-4" />
               </button>
               <button
-                onClick={() => setIsOpen(false)}
+                onClick={() => {
+                  rexVoice.stopSpeaking();
+                  setIsOpen(false);
+                }}
                 title="Close chatbot"
-                className="p-1.5 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800 transition-colors"
+                className="p-1.5 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800 transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -266,7 +325,7 @@ export const Chatbot: React.FC = () => {
           </div>
 
           {/* Quick Question Buttons Strip */}
-          <div className="px-4 py-2.5 bg-zinc-50 dark:bg-zinc-900/60 border-b border-zinc-200 dark:border-white/5 overflow-x-auto no-scrollbar flex items-center gap-1.5">
+          <div className="px-4 py-2 bg-zinc-50 dark:bg-zinc-900/60 border-b border-zinc-200 dark:border-white/5 overflow-x-auto no-scrollbar flex items-center gap-1.5">
             <span className="text-[10px] font-mono uppercase text-zinc-400 shrink-0">Suggestions:</span>
             {quickQuestions.map((q) => (
               <button
@@ -297,19 +356,41 @@ export const Chatbot: React.FC = () => {
                 </div>
 
                 <div
-                  className={`max-w-[82%] p-3.5 rounded-2xl space-y-1 ${
+                  className={`max-w-[85%] p-3.5 rounded-2xl space-y-1 relative group ${
                     m.sender === 'user'
                       ? 'bg-blue-600 text-white rounded-tr-none'
-                      : 'bg-zinc-100 dark:bg-zinc-800/90 text-zinc-900 dark:text-zinc-100 border border-zinc-200/80 dark:border-white/5 rounded-tl-none shadow-sm'
+                      : 'bg-zinc-100 dark:bg-zinc-800/95 text-zinc-900 dark:text-zinc-100 border border-zinc-200/80 dark:border-white/5 rounded-tl-none shadow-sm'
                   }`}
                 >
-                  <div className="whitespace-pre-line leading-relaxed text-[12.5px]">{m.text}</div>
-                  <div
-                    className={`text-[9.5px] font-mono text-right ${
-                      m.sender === 'user' ? 'text-blue-100' : 'text-zinc-400'
-                    }`}
-                  >
-                    {m.timestamp}
+                  {/* Clean Markdown Message Content */}
+                  {m.sender === 'user' ? (
+                    <div className="whitespace-pre-line leading-relaxed text-[12.5px]">{m.text}</div>
+                  ) : (
+                    <MarkdownMessage content={m.text} />
+                  )}
+
+                  <div className="flex items-center justify-between gap-2 pt-1 border-t border-zinc-200/50 dark:border-white/5 mt-1.5">
+                    {m.sender === 'rex' && (
+                      <button
+                        onClick={() => handleSpeakMessage(m.id, m.text)}
+                        className={`text-[10px] font-mono flex items-center gap-1 transition-colors cursor-pointer ${
+                          speakingMessageId === m.id
+                            ? 'text-cyan-400 font-semibold animate-pulse'
+                            : 'text-zinc-400 hover:text-cyan-300'
+                        }`}
+                        title="Hear Rex speak this message"
+                      >
+                        <Volume2 className="w-3 h-3" />
+                        <span>{speakingMessageId === m.id ? 'Speaking...' : 'Play Voice'}</span>
+                      </button>
+                    )}
+                    <div
+                      className={`text-[9.5px] font-mono text-right ml-auto ${
+                        m.sender === 'user' ? 'text-blue-100' : 'text-zinc-400'
+                      }`}
+                    >
+                      {m.timestamp}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -330,7 +411,7 @@ export const Chatbot: React.FC = () => {
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Input Form */}
+          {/* Input Form with Voice Mic & Send */}
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -338,11 +419,26 @@ export const Chatbot: React.FC = () => {
             }}
             className="p-3 bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-white/10 flex items-center gap-2"
           >
+            {/* Mic button for voice input */}
+            <button
+              type="button"
+              onClick={handleToggleMic}
+              className={`p-2 rounded-xl transition-all border cursor-pointer ${
+                isListening
+                  ? 'bg-emerald-500 text-zinc-950 border-emerald-400 animate-pulse'
+                  : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-300 border-zinc-200 dark:border-white/10 hover:text-cyan-400 hover:border-cyan-400/50'
+              }`}
+              title={isListening ? 'Listening... click to stop' : 'Speak to Rex by voice'}
+              aria-label="Voice input"
+            >
+              <Mic className="w-4 h-4" />
+            </button>
+
             <input
               type="text"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              placeholder="Ask Rex about projects, skills, tech stack..."
+              placeholder={isListening ? 'Listening to your voice...' : 'Ask Rex anything about projects, coding, skills...'}
               className="flex-1 px-3.5 py-2 text-xs bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-white/10 rounded-xl text-zinc-900 dark:text-white placeholder:text-zinc-400 focus:outline-none focus:border-cyan-400 transition-colors font-sans"
             />
             <button
@@ -357,7 +453,7 @@ export const Chatbot: React.FC = () => {
         </div>
       )}
 
-      {/* Draggable Rex Launcher (Can be placed in ANY location on screen with mouse) */}
+      {/* Draggable Rex Launcher */}
       <div
         style={{
           position: 'fixed',
@@ -372,16 +468,16 @@ export const Chatbot: React.FC = () => {
         className={`group flex flex-col items-center select-none transition-transform duration-150 ${
           isDragging ? 'cursor-grabbing scale-105' : 'cursor-grab hover:scale-105'
         }`}
-        title="Rex AI Companion • Click to chat • Drag anywhere"
+        title="Rex AI Companion • Click to chat or drag anywhere"
       >
-        {/* Subtle, soft ambient rim light (toned down per user request) */}
+        {/* Subtle, soft ambient rim light */}
         <div
           className={`absolute -inset-1 bg-gradient-to-r from-blue-600 via-cyan-400 to-indigo-600 rounded-full blur-md pointer-events-none transition-opacity duration-300 ${
             isDragging ? 'opacity-25' : 'opacity-10 group-hover:opacity-20'
           }`}
         />
 
-        {/* Floating Robot Clickable & Draggable Pod (No text hovering over Rex) */}
+        {/* Floating Robot Clickable & Draggable Pod */}
         <div className="relative p-1 rounded-full">
           <RexRobot
             size="md"
