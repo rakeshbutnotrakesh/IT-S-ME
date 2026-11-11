@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { ArrowDown, FileText, Send, Sparkles, Zap, Code2, ArrowRight, ExternalLink } from 'lucide-react';
+import React from 'react';
+import { ArrowDown, FileText, Send, Sparkles, Zap, Code2, ArrowRight } from 'lucide-react';
 import { personalInfo } from '../data/portfolio';
 import { RexHeroCard } from './RexHeroCard';
-import { AnimatedConsoleBox } from './AnimatedConsoleBox';
 
 interface HeroProps {
   onOpenResume: () => void;
@@ -11,8 +10,6 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
-  const [activeTab, setActiveTab] = useState<'rex' | 'console'>('rex');
-
   const openRexChat = () => {
     window.dispatchEvent(new CustomEvent('open-rex-chat'));
   };
@@ -121,38 +118,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenResume }) => {
 
           {/* Right Column: Rex 2D Floating AI Card (Exact match to reference screenshot) */}
           <div className="lg:col-span-5 flex flex-col items-center">
-            {/* View Switcher: Rex Robot vs Interactive Terminal */}
-            <div className="w-full flex items-center justify-end gap-2 mb-3 font-mono text-[11px]">
-              <button
-                onClick={() => setActiveTab('rex')}
-                className={`px-3 py-1 rounded-lg transition-colors flex items-center gap-1.5 ${
-                  activeTab === 'rex'
-                    ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-semibold'
-                    : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                <Zap className="w-3 h-3 text-cyan-400" />
-                <span>Rex 2D Avatar</span>
-              </button>
-
-              <button
-                onClick={() => setActiveTab('console')}
-                className={`px-3 py-1 rounded-lg transition-colors flex items-center gap-1.5 ${
-                  activeTab === 'console'
-                    ? 'bg-blue-500/20 text-blue-300 border border-blue-500/40 font-semibold'
-                    : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                <Code2 className="w-3 h-3 text-blue-400" />
-                <span>Terminal Console</span>
-              </button>
-            </div>
-
-            {activeTab === 'rex' ? (
-              <RexHeroCard onOpenChat={openRexChat} />
-            ) : (
-              <AnimatedConsoleBox />
-            )}
+            <RexHeroCard onOpenChat={openRexChat} />
           </div>
         </div>
       </div>
