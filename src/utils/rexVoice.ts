@@ -93,6 +93,7 @@ class RexVoiceSystem {
   private currentUtterance: SpeechSynthesisUtterance | null = null;
   private recognitionInstance: any = null;
   private onSpeakingChangeCallbacks: Set<(speaking: boolean) => void> = new Set();
+  private onMutedChangeCallbacks: Set<(muted: boolean) => void> = new Set();
   private bestVoice: SpeechSynthesisVoice | null = null;
 
   constructor() {
@@ -136,6 +137,13 @@ class RexVoiceSystem {
     };
   }
 
+  public subscribeMuted(cb: (muted: boolean) => void): () => void {
+    this.onMutedChangeCallbacks.add(cb);
+    return () => {
+      this.onMutedChangeCallbacks.delete(cb);
+    };
+  }
+
   private notifySpeaking(speaking: boolean) {
     this.onSpeakingChangeCallbacks.forEach((cb) => cb(speaking));
   }
@@ -145,10 +153,22 @@ class RexVoiceSystem {
     if (muted) {
       this.stopSpeaking();
     }
+    this.onMutedChangeCallbacks.forEach((cb) => cb(muted));
   }
 
   public getMuted(): boolean {
     return this.isMuted;
+  }
+
+  public stopListening() {
+    if (this.recognitionInstance) {
+      try {
+        this.recognitionInstance.stop();
+      } catch {
+        // Ignore
+      }
+      this.recognitionInstance = null;
+    }
   }
 
   public stopSpeaking() {

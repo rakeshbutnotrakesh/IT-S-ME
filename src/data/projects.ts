@@ -1,3 +1,10 @@
+import imgFintech from '../assets/images/project_fintech_os_1793976471893.jpg';
+import imgSpatial from '../assets/images/hero_abstract_spatial_1793976472134.jpg';
+import imgCommerce from '../assets/images/project_avant_commerce_1793976472540.jpg';
+import imgCanvas from '../assets/images/project_ai_canvas_1793976473412.jpg';
+
+export type ProjectStatus = 'Completed' | 'In Development' | 'Planned';
+
 export interface ProjectItem {
   id: string;
   name: string;
@@ -5,9 +12,10 @@ export interface ProjectItem {
   description: string;
   detailedOverview?: string;
   techStack: string[];
-  status: 'Live' | 'Planned / In Development' | 'Experimental / Personal Projects';
+  status: ProjectStatus;
   githubUrl?: string;
   liveUrl?: string;
+  demoNote?: string;
   highlights: string[];
   coverImage: string;
 }
@@ -17,136 +25,137 @@ export const projectsData: ProjectItem[] = [
     id: "personal-portfolio",
     name: "Personal Developer Portfolio",
     category: "Web Development",
-    description: "A personal portfolio website showcasing technical interests, projects and development journey.",
-    detailedOverview: "Built from the ground up using React, TypeScript, and Vite with a futuristic dark/light theme aesthetic. Features an interactive rule-based assistant ('Rex'), responsive navigation, live category filters, and an Antigravity particle swarm simulation.",
+    description: "A responsive developer portfolio showcasing technical skills, projects, academic record, and interactive companion Rex.",
+    detailedOverview: "Built with React, TypeScript, Vite, and Tailwind CSS with dark and light theme persistence. Features an offline rule-based portfolio assistant ('Rex'), category filtering, keyboard command palette, and an interactive particle swarm canvas.",
     techStack: ["React", "TypeScript", "Vite", "Tailwind CSS"],
-    status: "Live",
+    status: "Completed",
     githubUrl: "https://github.com/rakeshbutnotrakesh",
-    liveUrl: "https://rakesh-kumar-mondal.vercel.app",
+    liveUrl: "https://portfolio-two-puce-hj49ocwerj.vercel.app/",
     highlights: [
-      "Lightweight rule-based AI-style assistant (Rex)",
-      "Dark & Light mode support with persistent state",
-      "Interactive Swarm Antigravity particle canvas",
-      "100% responsive layout across all device viewports"
+      "Offline rule-based portfolio assistant (Rex) with zero API keys",
+      "Dark & Light mode support with persisted theme preference",
+      "Interactive Swarm Antigravity canvas with toggleable physics",
+      "Responsive layout verified from 320px mobile to 1920px desktop"
     ],
-    coverImage: "/src/assets/images/project_fintech_os_1793976471893.jpg"
+    coverImage: imgFintech
   },
   {
     id: "cybersafe",
     name: "CyberSafe",
     category: "Cybersecurity",
-    description: "A browser-based cybersecurity toolkit featuring password analysis, secure password generation, URL risk analysis and file hash generation.",
-    detailedOverview: "An educational and utility security workspace using the native Web Crypto API. Allows users to compute SHA-256 file hashes client-side, evaluate entropy in passwords, and inspect URL components for suspicious indicators.",
+    description: "A browser-based cybersecurity toolkit featuring password strength analysis, secure password generation, URL inspection, and SHA-256 file hashing.",
+    detailedOverview: "An educational security utility powered by the native Web Crypto API. Users can compute local SHA-256 file checksums, evaluate password entropy, and inspect URL components for suspicious patterns without uploading files.",
     techStack: ["React", "TypeScript", "Web Crypto API", "Tailwind CSS"],
-    status: "Live",
+    status: "Completed",
     githubUrl: "https://github.com/rakeshbutnotrakesh",
     liveUrl: "https://cybersafe-eosin-five.vercel.app/",
     highlights: [
-      "Cryptographic SHA-256 checksum calculation for local files",
-      "Zxcvbn-style entropy scoring and password security analyzer",
-      "URL component inspector & educational security best practices"
+      "Client-side SHA-256 checksum computation for local files",
+      "Password entropy scoring and configurable secure generator",
+      "URL component analyzer and security awareness checks"
     ],
-    coverImage: "/src/assets/images/project_fintech_os_1793976471893.jpg"
+    coverImage: imgFintech
   },
   {
     id: "lifeos",
     name: "LifeOS",
     category: "Productivity & Utilities",
-    description: "A personal productivity workspace for managing tasks, studies, finances, habits and goals.",
-    detailedOverview: "An integrated personal management operating system consolidating daily task management, BCA study schedules, habit trackers, and milestone planning into one focused dashboard.",
+    description: "A personal productivity workspace for organizing tasks, study schedules, habits, expenses, and goals.",
+    detailedOverview: "An integrated personal workspace consolidating daily task lists, BCA revision planning, habit streaks, and goal milestones inside a clean local-first interface.",
     techStack: ["React", "TypeScript", "Tailwind CSS", "LocalStorage"],
-    status: "Live",
+    status: "Completed",
     githubUrl: "https://github.com/rakeshbutnotrakesh",
     liveUrl: "https://lifeos-puce-theta.vercel.app/",
     highlights: [
       "Unified student study and revision planner",
-      "Habit formation streaks with visual progress meters",
-      "Minimalist distraction-free dark interface with local persistence"
+      "Habit formation streaks with clear progress tracking",
+      "Offline-ready browser LocalStorage persistence"
     ],
-    coverImage: "/src/assets/images/hero_abstract_spatial_1793976472134.jpg"
+    coverImage: imgSpatial
   },
   {
     id: "fileforge",
     name: "FileForge",
     category: "Productivity & Utilities",
-    description: "An all-in-one local file conversion workspace featuring document conversion, PDF tools, image processing and passport-size photo creation.",
-    detailedOverview: "A privacy-first, client-side utility suite designed to process files directly inside the browser using modern Web APIs, WebAssembly, and Canvas, eliminating the need to upload sensitive documents to remote servers.",
-    techStack: ["React", "TypeScript", "Vite", "Browser APIs", "Canvas API"],
-    status: "Live",
+    description: "A browser-local file utility workspace for document workflows, PDF tools, image resizing, and passport-size photo preparation.",
+    detailedOverview: "A privacy-focused client-side utility suite engineered to process images and documents directly in the browser using modern Web and Canvas APIs so sensitive files stay on the user's device.",
+    techStack: ["React", "TypeScript", "Vite", "Canvas API"],
+    status: "Completed",
     githubUrl: "https://github.com/rakeshbutnotrakesh",
     liveUrl: "https://fileforge-jet.vercel.app/",
     highlights: [
-      "Zero server uploads: 100% local browser processing",
-      "Image resizing, cropping & passport-size photo generator",
-      "PDF merge, split, and client-side document conversions"
+      "Local browser processing with zero server file uploads",
+      "Image resizing, cropping, and passport-size photo creation",
+      "Fast client-side document and PDF helper utilities"
     ],
-    coverImage: "/src/assets/images/project_avant_commerce_1793976472540.jpg"
+    coverImage: imgCommerce
   },
   {
     id: "civicdesk",
     name: "CivicDesk",
     category: "Community & Web Apps",
-    description: "A local community issue management application that helps users record and track neighbourhood problems.",
-    detailedOverview: "A civic empowerment tool enabling residents to document public infrastructure defects (such as streetlights, potholes, and garbage issues) with localized priority tags, status updates, and offline-first LocalStorage tracking.",
+    description: "A community issue tracking web application that helps users record, prioritize, and monitor neighborhood problems.",
+    detailedOverview: "A civic issue logger enabling residents to record local infrastructure concerns (such as streetlights, road damage, or sanitation issues) with priority levels, category filters, and local persistence.",
     techStack: ["React", "TypeScript", "Tailwind CSS", "LocalStorage"],
-    status: "Live",
+    status: "Completed",
     githubUrl: "https://github.com/rakeshbutnotrakesh",
     liveUrl: "https://civicdesk-gamma.vercel.app/",
     highlights: [
-      "Community problem reporting and status tracking",
-      "Offline-resilient state stored locally in the browser",
-      "Categorized urgency levels and issue resolution log"
+      "Structured neighborhood issue reporting and status workflow",
+      "Offline-resilient state persisted in browser LocalStorage",
+      "Priority tagging and resolution progress log"
     ],
-    coverImage: "/src/assets/images/project_ai_canvas_1793976473412.jpg"
+    coverImage: imgCanvas
   },
   {
     id: "vault",
     name: "Vault",
     category: "Cybersecurity",
-    description: "A secure, privacy-first digital vault for client-side encrypted credentials, protected notes, and sensitive records.",
-    detailedOverview: "A client-side cryptographic storage application engineered to keep sensitive notes, API keys, and credentials encrypted in the browser with AES-GCM and zero third-party telemetry.",
+    description: "A privacy-first digital vault for client-side encrypted notes, credentials, and sensitive developer snippets.",
+    detailedOverview: "A client-side cryptographic storage app designed to encrypt private notes and credentials right inside the browser using the Web Crypto API without external telemetry.",
     techStack: ["React", "TypeScript", "Web Crypto API", "Tailwind CSS"],
-    status: "Live",
+    status: "Completed",
     githubUrl: "https://github.com/rakeshbutnotrakesh",
     liveUrl: "https://vault-ruby-theta.vercel.app/",
     highlights: [
-      "End-to-end client-side encryption with Web Crypto API",
-      "Encrypted note and secret credential manager",
-      "Clean zero-knowledge architecture with offline reliability"
+      "Client-side AES-GCM encryption via Web Crypto API",
+      "Organized encrypted notes and credential storage",
+      "Zero external tracking or third-party cloud storage"
     ],
-    coverImage: "/src/assets/images/project_fintech_os_1793976471893.jpg"
+    coverImage: imgFintech
   },
   {
     id: "algovision",
     name: "AlgoVision",
     category: "Computer Science & DSA",
-    description: "An interactive algorithm and data structure visualizer demonstrating sorting, pathfinding, and computational concepts.",
-    detailedOverview: "An educational visualizer designed to bring Data Structures and Algorithms to life. Features real-time step-by-step playback, comparison counters, and interactive speed controls for sorting algorithms and graph pathfinding.",
+    description: "An interactive algorithm and data structure visualizer demonstrating sorting and graph pathfinding step by step.",
+    detailedOverview: "An educational computer science tool built to visualize how classic sorting and pathfinding algorithms operate in real time, complete with speed controls and comparison tracking.",
     techStack: ["React", "TypeScript", "Canvas API", "Algorithms"],
-    status: "Live",
+    status: "Completed",
     githubUrl: "https://github.com/rakeshbutnotrakesh",
     liveUrl: "https://algovision-sand.vercel.app/",
     highlights: [
-      "Step-by-step sorting visualization (Quick, Merge, Bubble, Heap)",
-      "Interactive pathfinding algorithms (Dijkstra, A* Search)",
-      "Real-time speed regulation and comparison metrics"
+      "Step-by-step sorting animations (Quick, Merge, Bubble, Heap)",
+      "Interactive grid pathfinding (Dijkstra, A* Search)",
+      "Adjustable execution speed and comparison counters"
     ],
-    coverImage: "/src/assets/images/project_ai_canvas_1793976473412.jpg"
+    coverImage: imgCanvas
   },
   {
     id: "n8n-automation-workflows",
     name: "n8n Automation Workflows",
     category: "Automation & Backend",
-    description: "Practical workflow automation experiments involving triggers, integrations, data processing and automated tasks.",
-    detailedOverview: "A collection of self-hosted n8n nodes and Docker workflows designed to automate repetitive digital tasks, sync spreadsheet records, fetch API webhooks, and trigger periodic notifications.",
+    description: "Hands-on workflow automation experiments involving webhooks, scheduled triggers, data processing, and API integrations.",
+    detailedOverview: "A self-hosted collection of n8n workflows running inside Docker containers to automate repetitive tasks, transform webhook payloads, and test automated notification pipelines.",
     techStack: ["n8n", "Docker", "JavaScript", "Workflow Automation"],
-    status: "Experimental / Personal Projects",
+    status: "In Development",
     githubUrl: "https://github.com/rakeshbutnotrakesh",
+    demoNote: "Self-hosted locally via Docker — no public web demo is hosted.",
     highlights: [
-      "Dockerized local n8n workflow deployment",
-      "Webhook trigger listeners and data transformation nodes",
-      "Automated multi-step event triggers and alerting"
+      "Dockerized local n8n workflow environment",
+      "Webhook listeners and JSON data transformation nodes",
+      "Scheduled triggers and automated alert pipelines"
     ],
-    coverImage: "/src/assets/images/hero_abstract_spatial_1793976472134.jpg"
+    coverImage: imgSpatial
   }
 ];

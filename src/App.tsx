@@ -25,6 +25,13 @@ export default function App() {
 
   return (
     <div className="relative min-h-screen bg-white dark:bg-[#09090b] text-zinc-900 dark:text-zinc-100 transition-colors duration-200">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:rounded-lg focus:bg-blue-600 focus:text-white focus:text-xs focus:font-mono focus:shadow-lg"
+      >
+        Skip to main content
+      </a>
+
       {/* Top Reading / Scroll Progress Bar */}
       <ScrollProgressBar />
 
@@ -45,7 +52,7 @@ export default function App() {
       />
 
       {/* Main Landmark */}
-      <main className="relative z-10">
+      <main id="main-content" className="relative z-10">
         {/* Hero Section */}
         <Hero
           onOpenResume={() => setResumeOpen(true)}

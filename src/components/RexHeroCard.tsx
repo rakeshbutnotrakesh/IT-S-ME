@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Sparkles, Activity, MessageSquare, Heart, Mic, MicOff, Volume2, VolumeX, Radio, CornerDownLeft } from 'lucide-react';
+import { Sparkles, Activity, MessageSquare, Heart, Mic, MicOff, Volume2, VolumeX, Radio } from 'lucide-react';
 import { RexRobot } from './RexRobot';
 import { rexVoice, chimeEngine } from '../utils/rexVoice';
 import { getChatbotResponse } from '../utils/chatbotEngine';
@@ -21,16 +21,22 @@ export const RexHeroCard: React.FC<RexHeroCardProps> = ({ onOpenChat }) => {
   const [floatingHearts, setFloatingHearts] = useState<FloatingLove[]>([]);
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
+  const [isMuted, setIsMuted] = useState(() => rexVoice.getMuted());
   const [voiceFeedback, setVoiceFeedback] = useState<string | null>(null);
   const activeListenerRef = useRef<{ stop: () => void } | null>(null);
 
-  // Subscribe to Rex's speech synthesis state
+  // Subscribe to Rex's speech synthesis & global mute state
   useEffect(() => {
-    const unsubscribe = rexVoice.subscribeSpeaking((speaking) => {
+    const unsubSpeaking = rexVoice.subscribeSpeaking((speaking) => {
       setIsSpeaking(speaking);
     });
-    return () => unsubscribe();
+    const unsubMuted = rexVoice.subscribeMuted((muted) => {
+      setIsMuted(muted);
+    });
+    return () => {
+      unsubSpeaking();
+      unsubMuted();
+    };
   }, []);
 
   const cuteLoveSpokenLines = [
@@ -49,8 +55,10 @@ export const RexHeroCard: React.FC<RexHeroCardProps> = ({ onOpenChat }) => {
     // 2. Set cute love expression on Rex
     setIsLoving(true);
 
-    // 3. Play harmonic love chime
-    chimeEngine.playLoveChime();
+    // 3. Play harmonic love chime if not muted
+    if (!isMuted) {
+      chimeEngine.playLoveChime();
+    }
 
     // 4. Pick a cute love line and speak it clearly with cute undistorted voice
     const randomSpeech = cuteLoveSpokenLines[Math.floor(Math.random() * cuteLoveSpokenLines.length)];
@@ -127,7 +135,7 @@ export const RexHeroCard: React.FC<RexHeroCardProps> = ({ onOpenChat }) => {
     }
 
     if (lower.includes('who') || lower.includes('rakesh') || lower.includes('about')) {
-      const reply = "Rakesh Kumar Mondal is a BCA student and software developer building AI automations and digital tools!";
+      const reply = "Rakesh Kumar Mondal is a BCA student with an SGPA of 9.65, building practical web apps and workflow automations!";
       setBubbleText(`Rex: "${reply}"`);
       rexVoice.speak(reply);
       const el = document.getElementById('about');
@@ -308,7 +316,7 @@ export const RexHeroCard: React.FC<RexHeroCardProps> = ({ onOpenChat }) => {
             className={`flex-1 py-2 px-3.5 rounded-xl font-heading font-semibold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm ${
               isListening
                 ? 'bg-emerald-500 text-zinc-950 animate-pulse shadow-emerald-500/30'
-                : 'bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white shadow-cyan-500/25 active:scale-98'
+                : 'bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white shadow-cyan-500/25 active:scale-[0.98]'
             }`}
           >
             {isListening ? (

@@ -87,7 +87,7 @@ function renderFormattedText(text: string, keyPrefix: string): React.ReactNode {
           const bulletContent = trimmed.replace(/^[•\-*]\s*/, '');
           return (
             <div key={`${keyPrefix}-li-${lIdx}`} className="flex items-start gap-2 pl-1">
-              <span className="text-cyan-400 font-bold shrink-0 mt-0.5">•</span>
+              <span className="text-cyan-700 dark:text-cyan-400 font-bold shrink-0 mt-0.5">•</span>
               <span className="flex-1">{formatInline(bulletContent)}</span>
             </div>
           );
@@ -96,7 +96,7 @@ function renderFormattedText(text: string, keyPrefix: string): React.ReactNode {
         // Heading
         if (trimmed.startsWith('### ')) {
           return (
-            <h4 key={`${keyPrefix}-h-${lIdx}`} className="font-heading font-bold text-sm text-white pt-1 text-cyan-300">
+            <h4 key={`${keyPrefix}-h-${lIdx}`} className="font-heading font-bold text-sm text-cyan-700 dark:text-cyan-300 pt-1">
               {formatInline(trimmed.replace(/^###\s*/, ''))}
             </h4>
           );
@@ -123,7 +123,7 @@ function formatInline(str: string): React.ReactNode[] {
     const token = match[0];
     if (token.startsWith('**') && token.endsWith('**')) {
       elements.push(
-        <strong key={`b-${match.index}`} className="font-semibold text-white">
+        <strong key={`b-${match.index}`} className="font-semibold text-zinc-950 dark:text-white">
           {token.slice(2, -2)}
         </strong>
       );
@@ -131,7 +131,7 @@ function formatInline(str: string): React.ReactNode[] {
       elements.push(
         <code
           key={`c-${match.index}`}
-          className="px-1.5 py-0.5 mx-0.5 rounded bg-zinc-800 border border-zinc-700/60 font-mono text-[11px] text-cyan-300"
+          className="px-1.5 py-0.5 mx-0.5 rounded bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700/60 font-mono text-[11px] text-cyan-800 dark:text-cyan-300"
         >
           {token.slice(1, -1)}
         </code>

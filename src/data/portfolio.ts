@@ -9,6 +9,7 @@ export interface PersonalInfo {
   aboutText: string[];
   academic: {
     degree: string;
+    sgpa: string;
     focus: string;
   };
   roles: string[];
@@ -25,41 +26,39 @@ export const personalInfo: PersonalInfo = {
   name: "Rakesh Kumar Mondal",
   firstName: "Rakesh",
   displayInitials: "RKM",
-  title: "BCA Student | Aspiring Software Developer | Automation Enthusiast",
+  title: "BCA Student | Aspiring Software Developer | Web Developer | Automation Enthusiast",
   tagline: "Building Ideas Into Digital Reality.",
   alternativeHero: "Curious Mind. Creative Logic. Practical Solutions.",
   shortIntro:
-    "I'm Rakesh Kumar Mondal, a BCA student passionate about programming, software development, web technologies, cybersecurity and automation. I enjoy exploring new technologies, building practical digital solutions and turning ideas into functional projects.",
+    "I'm Rakesh Kumar Mondal, a BCA student (SGPA 9.65) passionate about programming, software development, web development, Python, cybersecurity, workflow automation, and artificial intelligence. I build practical digital solutions that turn ideas into functional software.",
   aboutText: [
-    "I'm a Bachelor of Computer Applications student with a strong interest in software development and modern technologies.",
-    "My journey revolves around learning programming languages, exploring web technologies, experimenting with automation tools and building practical applications.",
-    "I believe that technology becomes meaningful when it solves real-world problems. My goal is to continuously improve my technical abilities and develop useful, reliable and well-designed digital products."
+    "I'm a Bachelor of Computer Applications (BCA) student with an SGPA of 9.65 and a strong interest in programming, software development, and modern web technologies.",
+    "My learning revolves around core languages like C, C++, Python, and Java, building responsive TypeScript and React applications, experimenting with Docker and n8n workflow automation, and studying cybersecurity fundamentals.",
+    "I believe technology becomes meaningful when it solves everyday problems cleanly and reliably. My goal is to keep strengthening my computer science foundation while shipping well-designed, practical software."
   ],
   academic: {
     degree: "Bachelor of Computer Applications (BCA)",
-    focus: "Programming, Software Engineering & Computer Applications"
+    sgpa: "9.65",
+    focus: "Programming, Software Development, Web Engineering & Workflow Automation"
   },
   roles: [
     "BCA Student",
-    "Software Developer",
-    "Python Programmer",
+    "Aspiring Software Developer",
     "Web Developer",
-    "Automation Enthusiast",
-    "Cybersecurity Learner"
+    "Automation Enthusiast"
   ],
   interests: [
+    "Programming",
     "Software Development",
-    "Full-Stack Web Development",
-    "Python Programming",
+    "Web Development",
+    "Python",
     "Cybersecurity",
     "Workflow Automation",
-    "Artificial Intelligence",
-    "Problem Solving",
-    "Data Structures and Algorithms"
+    "Artificial Intelligence"
   ],
   contact: {
     github: "https://github.com/rakeshbutnotrakesh",
-    portfolioUrl: "https://rakesh-kumar-mondal.vercel.app",
+    portfolioUrl: "https://portfolio-two-puce-hj49ocwerj.vercel.app/",
     email: "rakeshkumarmondal51@gmail.com",
     location: "India"
   }

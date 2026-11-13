@@ -5,7 +5,7 @@ export function useTheme() {
     try {
       const saved = localStorage.getItem('rkm_theme');
       if (saved === 'light' || saved === 'dark') return saved;
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'dark';
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     } catch {
       return 'dark';
     }

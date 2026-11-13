@@ -3,15 +3,13 @@ export interface SkillCategory {
   description: string;
   skills: {
     name: string;
-    level?: string;
-    icon?: string;
   }[];
 }
 
 export const skillCategories: SkillCategory[] = [
   {
-    title: "Programming Languages",
-    description: "Core foundational languages mastered through computer applications coursework and problem-solving practice.",
+    title: "Programming",
+    description: "Core programming languages practiced through BCA coursework, logic building, and data structures.",
     skills: [
       { name: "C" },
       { name: "C++" },
@@ -21,7 +19,7 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     title: "Web Development",
-    description: "Modern client-side engineering stack for crafting clean, responsive, and interactive digital interfaces.",
+    description: "Frontend technologies used to build responsive, typed, and accessible web applications.",
     skills: [
       { name: "HTML" },
       { name: "CSS" },
@@ -32,28 +30,16 @@ export const skillCategories: SkillCategory[] = [
     ]
   },
   {
-    title: "Tools & Technologies",
-    description: "Developer tooling, containerization, workflow orchestrators, and hosting platforms used in daily workflow.",
+    title: "Tools",
+    description: "Version control, containerization, workflow automation, and deployment platforms.",
     skills: [
       { name: "Git" },
       { name: "GitHub" },
-      { name: "VS Code" },
       { name: "Docker" },
       { name: "n8n" },
+      { name: "VS Code" },
       { name: "Google AI Studio" },
       { name: "Vercel" }
-    ]
-  },
-  {
-    title: "Technical Interests",
-    description: "Active domains of ongoing study, algorithmic thinking, and self-directed project development.",
-    skills: [
-      { name: "Data Structures and Algorithms" },
-      { name: "Cybersecurity" },
-      { name: "Workflow Automation" },
-      { name: "Artificial Intelligence" },
-      { name: "API Integration" },
-      { name: "Software Architecture" }
     ]
   }
 ];

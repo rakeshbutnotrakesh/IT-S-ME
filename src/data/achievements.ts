@@ -9,43 +9,43 @@ export interface AchievementItem {
 
 export const achievementsData: AchievementItem[] = [
   {
-    id: "academic-foundation",
-    metric: "BCA",
-    title: "Computer Applications Studies",
-    subtitle: "Core Academic Foundation",
-    description: "Dedicated study in Bachelor of Computer Applications coursework, emphasizing computer science fundamentals, discrete mathematics, and programming discipline.",
-    badge: "Verified Academic Study"
+    id: "academic-sgpa",
+    metric: "9.65",
+    title: "BCA Academic Performance (SGPA)",
+    subtitle: "Bachelor of Computer Applications",
+    description: "Achieved an SGPA of 9.65 in BCA coursework, demonstrating strong consistency across programming, core computer science, and application development subjects.",
+    badge: "Academic Achievement"
   },
   {
-    id: "portfolio-deployment",
-    metric: "100%",
-    title: "Personal Portfolio Deployed on Vercel",
-    subtitle: "Production Live Release",
-    description: "Designed, engineered, and continuously deployed this modern, responsive developer portfolio with custom TypeScript architecture and interactive components to Vercel.",
-    badge: "Live Deployment"
+    id: "deployed-projects",
+    metric: "7 Live",
+    title: "Deployed Web Applications on Vercel",
+    subtitle: "Production Portfolio & Utilities",
+    description: "Built and deployed seven live React and TypeScript web applications including CyberSafe, LifeOS, FileForge, CivicDesk, Vault, AlgoVision, and this portfolio.",
+    badge: "Live Deployments"
   },
   {
     id: "github-workflow",
     metric: "Git/GH",
     title: "GitHub-Based Development Workflow",
-    subtitle: "Version Controlled Repositories",
-    description: "Active development workflow utilizing git version control, semantic branching, atomic commit discipline, and open repository management on GitHub (@rakeshbutnotrakesh).",
+    subtitle: "Version Controlled Codebases",
+    description: "Maintaining structured repositories, commit history, and collaborative workflows on GitHub (@rakeshbutnotrakesh) across web and programming projects.",
     badge: "Developer Tooling"
   },
   {
     id: "automation-exploration",
     metric: "n8n",
-    title: "Hands-on Automation Tooling",
-    subtitle: "Docker & n8n Experiments",
-    description: "Successfully configured self-hosted n8n workflows and Docker containers to explore event-driven automation, webhooks, and programmatic task scheduling.",
+    title: "Docker & Workflow Automation Practice",
+    subtitle: "Self-Hosted n8n Experiments",
+    description: "Running local n8n workflow containers with Docker to explore webhook integrations, automated data processing, and event-driven pipelines.",
     badge: "Automation Practice"
   },
   {
     id: "continuous-practice",
     metric: "DSA",
-    title: "Continuous Programming Practice",
-    subtitle: "Problem Solving & Core Logic",
-    description: "Regularly practicing data structures, algorithms, and logic challenges across C, C++, and Python to reinforce computational thinking and code optimization.",
-    badge: "Ongoing Dedication"
+    title: "Programming & Problem Solving",
+    subtitle: "C, C++, Python & Java",
+    description: "Consistent practice in core programming languages, data structures, and algorithmic problem solving to build reliable software fundamentals.",
+    badge: "Core Fundamentals"
   }
 ];
