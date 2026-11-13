@@ -34,7 +34,7 @@ export const MarkdownMessage: React.FC<MarkdownMessageProps> = ({ content }) => 
     parts.push(
       <div key={`code-${currentIndex}`} className="my-2.5 rounded-xl overflow-hidden bg-zinc-950 border border-zinc-800 font-mono text-xs shadow-md">
         <div className="flex items-center justify-between px-3 py-1.5 bg-zinc-900 border-b border-zinc-800 text-[11px] text-zinc-400">
-          <span className="uppercase tracking-wider font-semibold text-cyan-400">{language}</span>
+          <span className="uppercase tracking-wider font-semibold text-amber-400">{language}</span>
           <button
             onClick={() => handleCopy(code, currentIndex)}
             className="flex items-center gap-1 hover:text-white transition-colors cursor-pointer"
@@ -87,7 +87,7 @@ function renderFormattedText(text: string, keyPrefix: string): React.ReactNode {
           const bulletContent = trimmed.replace(/^[•\-*]\s*/, '');
           return (
             <div key={`${keyPrefix}-li-${lIdx}`} className="flex items-start gap-2 pl-1">
-              <span className="text-cyan-700 dark:text-cyan-400 font-bold shrink-0 mt-0.5">•</span>
+              <span className="text-[var(--accent-text)] font-bold shrink-0 mt-0.5">•</span>
               <span className="flex-1">{formatInline(bulletContent)}</span>
             </div>
           );
@@ -96,7 +96,7 @@ function renderFormattedText(text: string, keyPrefix: string): React.ReactNode {
         // Heading
         if (trimmed.startsWith('### ')) {
           return (
-            <h4 key={`${keyPrefix}-h-${lIdx}`} className="font-heading font-bold text-sm text-cyan-700 dark:text-cyan-300 pt-1">
+            <h4 key={`${keyPrefix}-h-${lIdx}`} className="font-heading font-bold text-sm text-[var(--accent-text)] pt-1">
               {formatInline(trimmed.replace(/^###\s*/, ''))}
             </h4>
           );
@@ -131,7 +131,7 @@ function formatInline(str: string): React.ReactNode[] {
       elements.push(
         <code
           key={`c-${match.index}`}
-          className="px-1.5 py-0.5 mx-0.5 rounded bg-zinc-200 dark:bg-zinc-800 border border-zinc-300 dark:border-zinc-700/60 font-mono text-[11px] text-cyan-800 dark:text-cyan-300"
+          className="px-1.5 py-0.5 mx-0.5 rounded bg-[var(--bg-surface)] border border-[var(--border-hairline)] font-mono text-[11px] text-[var(--accent-text)]"
         >
           {token.slice(1, -1)}
         </code>

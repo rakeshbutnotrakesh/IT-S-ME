@@ -45,11 +45,11 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
   const sections = [
     { name: 'Home', href: '#home', desc: 'Hero introduction & developer overview' },
-    { name: 'About', href: '#about', desc: 'Bio, highlights & BCA degree (SGPA 9.65)' },
-    { name: 'Skills', href: '#skills', desc: 'Languages, Frameworks & Tools' },
-    { name: 'Projects', href: '#projects', desc: `Explore ${completedCount} live web apps & automation work` },
-    { name: 'Education & Timeline', href: '#timeline', desc: 'BCA performance & development progression' },
-    { name: 'Contact', href: '#contact', desc: 'Copy email, social links & contact form' },
+    { name: 'About', href: '#about', desc: 'Engineering narrative & BCA program' },
+    { name: 'Skills', href: '#skills', desc: 'Languages, Frameworks & Automation Tools' },
+    { name: 'Projects', href: '#projects', desc: `Explore ${completedCount} live apps & GitHub feed` },
+    { name: 'Certifications & Timeline', href: '#timeline', desc: 'Achievements & technical progression' },
+    { name: 'Contact', href: '#contact', desc: 'Copy email, social links & automated contact form' },
   ].filter(
     (s) =>
       s.name.toLowerCase().includes(query.toLowerCase()) ||
@@ -71,7 +71,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       <div className="absolute inset-0" onClick={onClose} />
 
       <div className="relative w-full max-w-xl bg-[var(--bg-canvas)] border border-[var(--border-strong)] rounded-2xl shadow-2xl overflow-hidden z-10">
-        {/* Search Input Bar */}
         <div className="flex items-center px-4 py-3 border-b border-[var(--border-hairline)] gap-3">
           <Search className="w-4 h-4 text-[var(--accent-text)] shrink-0" />
           <input
@@ -96,9 +95,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           </button>
         </div>
 
-        {/* Results List */}
         <div className="max-h-[380px] overflow-y-auto p-3 space-y-4 text-xs font-sans">
-          {/* Quick Actions */}
           <div className="space-y-1">
             <div className="px-2 py-1 text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)] font-semibold">
               Quick Actions
@@ -136,10 +133,10 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                 </div>
                 <div>
                   <div className="font-semibold group-hover:text-[var(--accent-text)]">
-                    View / Print Resume
+                    View / Download Resume
                   </div>
                   <div className="text-[11px] text-[var(--text-muted)]">
-                    BCA coursework (SGPA 9.65), skills &amp; projects
+                    BCA coursework, skills &amp; shipped projects
                   </div>
                 </div>
               </div>
@@ -166,7 +163,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             </button>
           </div>
 
-          {/* Projects */}
           {filteredProjects.length > 0 && (
             <div className="space-y-1">
               <div className="px-2 py-1 text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)] font-semibold">
@@ -189,7 +185,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                       <div className="font-semibold group-hover:text-[var(--accent-text)] flex items-center gap-2 flex-wrap">
                         <span>{project.name}</span>
                         <span className="text-[10px] font-mono text-[var(--text-muted)]">
-                          · {project.status}
+                          &middot; {project.status}
                         </span>
                       </div>
                       <div className="text-[11px] text-[var(--text-muted)] line-clamp-1">
@@ -207,7 +203,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             </div>
           )}
 
-          {/* Section Navigation */}
           {sections.length > 0 && (
             <div className="space-y-1">
               <div className="px-2 py-1 text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)] font-semibold">
@@ -235,7 +230,6 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           )}
         </div>
 
-        {/* Footer Hint Bar */}
         <div className="px-4 py-2.5 bg-[var(--bg-surface)] border-t border-[var(--border-hairline)] flex items-center justify-between text-[11px] font-mono text-[var(--text-muted)]">
           <span>Press ESC to dismiss</span>
           <span>Shortcut: ⌘K / Ctrl+K</span>

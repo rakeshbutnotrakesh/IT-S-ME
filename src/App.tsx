@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { MotionConfig } from 'framer-motion';
 import { useTheme } from './hooks/useTheme';
+import { Preloader } from './components/Preloader';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
@@ -12,7 +14,7 @@ import { Chatbot } from './components/Chatbot';
 import { ProjectDialog } from './components/ProjectDialog';
 import { ResumeModal } from './components/ResumeModal';
 import { ScrollProgressBar } from './components/ScrollProgressBar';
-import { CursorGlow } from './components/CursorGlow';
+import { CustomCursor } from './components/CustomCursor';
 import { ScrollReveal } from './components/ScrollReveal';
 import { ProjectItem } from './data/projects';
 
@@ -22,61 +24,63 @@ export default function App() {
   const [resumeOpen, setResumeOpen] = useState<boolean>(false);
 
   return (
-    <div className="relative min-h-screen bg-[var(--bg-canvas)] text-[var(--text-primary)] transition-colors duration-200">
-      <a
-        href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:rounded-lg focus:text-white focus:text-xs focus:font-mono focus:shadow-lg"
-        style={{ backgroundColor: 'var(--accent)' }}
-      >
-        Skip to main content
-      </a>
+    <MotionConfig reducedMotion="user">
+      <div className="relative min-h-screen bg-[var(--bg-canvas)] text-[var(--text-primary)] transition-colors duration-200">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:rounded-lg accent-gradient-bg focus:text-white focus:text-xs focus:font-mono focus:shadow-lg"
+        >
+          Skip to main content
+        </a>
 
-      <ScrollProgressBar />
-      <CursorGlow />
+        <Preloader />
+        <ScrollProgressBar />
+        <CustomCursor />
 
-      <Navbar
-        isDark={isDark}
-        onToggleTheme={toggleTheme}
-        onOpenResume={() => setResumeOpen(true)}
-      />
+        <Navbar
+          isDark={isDark}
+          onToggleTheme={toggleTheme}
+          onOpenResume={() => setResumeOpen(true)}
+        />
 
-      <main id="main-content" className="relative z-10">
-        <Hero onOpenResume={() => setResumeOpen(true)} />
+        <main id="main-content" className="relative z-10">
+          <Hero onOpenResume={() => setResumeOpen(true)} />
 
-        <ScrollReveal direction="up">
-          <About />
-        </ScrollReveal>
+          <ScrollReveal direction="up">
+            <About />
+          </ScrollReveal>
 
-        <ScrollReveal direction="up">
-          <Skills />
-        </ScrollReveal>
+          <ScrollReveal direction="up">
+            <Skills />
+          </ScrollReveal>
 
-        <ScrollReveal direction="up">
-          <Projects onSelectProject={(project) => setSelectedProject(project)} />
-        </ScrollReveal>
+          <ScrollReveal direction="up">
+            <Projects onSelectProject={(project) => setSelectedProject(project)} />
+          </ScrollReveal>
 
-        <ScrollReveal direction="up">
-          <Timeline />
-        </ScrollReveal>
+          <ScrollReveal direction="up">
+            <Timeline />
+          </ScrollReveal>
 
-        <ScrollReveal direction="up">
-          <Contact />
-        </ScrollReveal>
-      </main>
+          <ScrollReveal direction="up">
+            <Contact />
+          </ScrollReveal>
+        </main>
 
-      <Footer />
+        <Footer />
 
-      <Chatbot />
+        <Chatbot />
 
-      <ProjectDialog
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
+        <ProjectDialog
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
 
-      <ResumeModal
-        isOpen={resumeOpen}
-        onClose={() => setResumeOpen(false)}
-      />
-    </div>
+        <ResumeModal
+          isOpen={resumeOpen}
+          onClose={() => setResumeOpen(false)}
+        />
+      </div>
+    </MotionConfig>
   );
 }

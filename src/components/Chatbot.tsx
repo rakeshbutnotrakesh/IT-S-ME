@@ -19,7 +19,7 @@ export const Chatbot: React.FC = () => {
     {
       id: 'welcome',
       sender: 'rex',
-      text: "Hello! I'm Rex, Rakesh's portfolio companion. Ask me about his BCA SGPA (9.65), skills, live projects, development journey, or contact details!",
+      text: "Hello! I'm Rex, Rakesh's portfolio companion. Ask me about his BCA program, technical stack, live web apps, n8n automation workflows, or contact details!",
       timestamp: 'Ready',
     }
   ]);
@@ -259,7 +259,7 @@ export const Chatbot: React.FC = () => {
       {
         id: 'welcome-reset',
         sender: 'rex',
-        text: "Conversation reset! Ask me about Rakesh's BCA SGPA (9.65), skills, projects, or journey.",
+        text: "Conversation reset! Ask me about Rakesh's BCA studies, technical stack, projects, or automation work.",
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       }
     ]);
@@ -320,13 +320,13 @@ export const Chatbot: React.FC = () => {
             height: 'min(520px, calc(100dvh - 108px))',
             zIndex: 60,
           }}
-          className="flex flex-col bg-white dark:bg-[#0c1222] border border-zinc-200 dark:border-cyan-500/30 rounded-2xl shadow-2xl shadow-black/25 dark:shadow-cyan-950/90 overflow-hidden animate-in fade-in slide-in-from-bottom-3 transition-all"
+          className="flex flex-col bg-[var(--bg-surface)] border border-[var(--border-hairline)] rounded-xl shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-3 transition-all"
         >
-          {/* Minimalist Header */}
-          <div className="px-4 sm:px-5 py-3.5 bg-zinc-950 text-white flex items-center justify-between border-b border-cyan-500/20">
+          {/* Minimalist Editorial Header */}
+          <div className="px-4 sm:px-5 py-3.5 bg-[#0b0b0c] text-[#f5f5f3] flex items-center justify-between border-b border-[var(--border-hairline)]">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-600 to-cyan-400 p-[1.5px] flex items-center justify-center shrink-0">
-                <div className="w-full h-full bg-zinc-950 rounded-[10px] flex items-center justify-center text-cyan-400">
+              <div className="w-8 h-8 rounded-xl accent-gradient-bg p-[1.5px] flex items-center justify-center shrink-0">
+                <div className="w-full h-full bg-[#0b0b0c] rounded-[10px] flex items-center justify-center text-[var(--accent-start)]">
                   <Bot className="w-4 h-4" />
                 </div>
               </div>
@@ -346,16 +346,16 @@ export const Chatbot: React.FC = () => {
                 }}
                 title={voiceEnabled ? 'Mute Rex voice readout' : 'Enable Rex voice readout'}
                 aria-label={voiceEnabled ? 'Mute Rex voice readout' : 'Enable Rex voice readout'}
-                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-zinc-400 hover:text-cyan-400 rounded-lg hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-zinc-400 hover:text-[var(--accent-start)] rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
               >
-                {voiceEnabled ? <Volume2 className="w-4 h-4 text-cyan-400" /> : <VolumeX className="w-4 h-4 text-zinc-500" />}
+                {voiceEnabled ? <Volume2 className="w-4 h-4 text-[var(--accent-start)]" /> : <VolumeX className="w-4 h-4 text-zinc-500" />}
               </button>
               <button
                 type="button"
                 onClick={resetRexPosition}
                 title="Reset Rex launcher to corner"
                 aria-label="Reset Rex launcher to corner"
-                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-zinc-400 hover:text-cyan-400 rounded-lg hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-zinc-400 hover:text-white rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
               >
                 <Compass className="w-4 h-4" />
               </button>
@@ -364,7 +364,7 @@ export const Chatbot: React.FC = () => {
                 onClick={resetChat}
                 title="Reset conversation"
                 aria-label="Reset conversation"
-                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-zinc-400 hover:text-white rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
               >
                 <RotateCcw className="w-4 h-4" />
               </button>
@@ -377,7 +377,7 @@ export const Chatbot: React.FC = () => {
                 }}
                 title="Close chatbot"
                 aria-label="Close chatbot"
-                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800 transition-colors cursor-pointer"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-zinc-400 hover:text-white rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -385,14 +385,14 @@ export const Chatbot: React.FC = () => {
           </div>
 
           {/* Quick Question Buttons Strip */}
-          <div className="px-3.5 py-2 bg-zinc-50 dark:bg-zinc-900/60 border-b border-zinc-200 dark:border-white/5 overflow-x-auto no-scrollbar flex items-center gap-1.5 shrink-0">
-            <span className="text-[10px] font-mono uppercase text-zinc-500 shrink-0">Quick ask:</span>
+          <div className="px-3.5 py-2 bg-[var(--bg-subtle)] border-b border-[var(--border-hairline)] overflow-x-auto no-scrollbar flex items-center gap-1.5 shrink-0">
+            <span className="text-[10px] font-mono uppercase text-[var(--text-muted)] shrink-0">Quick ask:</span>
             {quickQuestions.map((q) => (
               <button
                 key={q.id}
                 type="button"
                 onClick={() => handleSendMessage(q.question)}
-                className="px-2.5 py-1 text-xs font-mono bg-white dark:bg-white/5 hover:bg-blue-50 dark:hover:bg-cyan-950/40 border border-zinc-200 dark:border-white/10 hover:border-blue-400 dark:hover:border-cyan-400/50 rounded-full whitespace-nowrap text-zinc-700 dark:text-zinc-300 transition-colors shrink-0 cursor-pointer"
+                className="px-2.5 py-1 text-xs font-mono bg-[var(--bg-surface)] border border-[var(--border-hairline)] hover:border-[var(--accent)]/60 rounded-lg whitespace-nowrap text-[var(--text-primary)] transition-colors shrink-0 cursor-pointer"
               >
                 {q.question}
               </button>
@@ -409,18 +409,18 @@ export const Chatbot: React.FC = () => {
                 <div
                   className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${
                     m.sender === 'user'
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-cyan-500/20 text-blue-600 dark:text-cyan-400'
+                      ? 'accent-gradient-bg text-white'
+                      : 'bg-[var(--bg-subtle)] border border-[var(--border-hairline)] text-[var(--accent-text)]'
                   }`}
                 >
                   {m.sender === 'user' ? <User className="w-3.5 h-3.5" /> : <Bot className="w-3.5 h-3.5" />}
                 </div>
 
                 <div
-                  className={`max-w-[85%] p-3 rounded-2xl space-y-1 relative ${
+                  className={`max-w-[85%] p-3 rounded-xl space-y-1 relative ${
                     m.sender === 'user'
-                      ? 'bg-blue-600 text-white rounded-tr-none'
-                      : 'bg-zinc-100 dark:bg-zinc-800/95 text-zinc-900 dark:text-zinc-100 border border-zinc-200/80 dark:border-white/5 rounded-tl-none shadow-sm'
+                      ? 'accent-gradient-bg text-white rounded-tr-none'
+                      : 'bg-[var(--bg-subtle)] text-[var(--text-primary)] border border-[var(--border-hairline)] rounded-tl-none'
                   }`}
                 >
                   {m.sender === 'user' ? (
@@ -429,15 +429,15 @@ export const Chatbot: React.FC = () => {
                     <MarkdownMessage content={m.text} />
                   )}
 
-                  <div className="flex items-center justify-between gap-2 pt-1 border-t border-zinc-200/60 dark:border-white/5 mt-1.5">
+                  <div className="flex items-center justify-between gap-2 pt-1 border-t border-[var(--border-hairline)] mt-1.5">
                     {m.sender === 'rex' && (
                       <button
                         type="button"
                         onClick={() => handleSpeakMessage(m.id, m.text)}
                         className={`text-[10px] font-mono flex items-center gap-1 transition-colors cursor-pointer ${
                           speakingMessageId === m.id
-                            ? 'text-blue-600 dark:text-cyan-400 font-semibold animate-pulse'
-                            : 'text-zinc-500 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-cyan-300'
+                            ? 'text-[var(--accent-text)] font-semibold animate-pulse'
+                            : 'text-[var(--text-muted)] hover:text-[var(--accent-text)]'
                         }`}
                         title="Hear Rex speak this message"
                       >
@@ -447,7 +447,7 @@ export const Chatbot: React.FC = () => {
                     )}
                     <div
                       className={`text-[9.5px] font-mono text-right ml-auto ${
-                        m.sender === 'user' ? 'text-blue-100' : 'text-zinc-500 dark:text-zinc-400'
+                        m.sender === 'user' ? 'text-white/85' : 'text-[var(--text-muted)]'
                       }`}
                     >
                       {m.timestamp}
@@ -459,13 +459,13 @@ export const Chatbot: React.FC = () => {
 
             {isTyping && (
               <div className="flex items-start gap-2.5">
-                <div className="w-7 h-7 rounded-lg bg-zinc-100 dark:bg-white/10 text-blue-600 dark:text-cyan-400 flex items-center justify-center shrink-0">
+                <div className="w-7 h-7 rounded-lg bg-[var(--bg-subtle)] text-[var(--accent-text)] flex items-center justify-center shrink-0">
                   <Bot className="w-3.5 h-3.5" />
                 </div>
-                <div className="p-3 bg-zinc-100 dark:bg-zinc-800/90 rounded-2xl rounded-tl-none border border-zinc-200 dark:border-white/5 flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 bg-blue-500 dark:bg-cyan-400 rounded-full animate-bounce [animation-delay:-0.3s]" />
-                  <span className="w-1.5 h-1.5 bg-blue-500 dark:bg-cyan-400 rounded-full animate-bounce [animation-delay:-0.15s]" />
-                  <span className="w-1.5 h-1.5 bg-blue-500 dark:bg-cyan-400 rounded-full animate-bounce" />
+                <div className="p-3 bg-[var(--bg-subtle)] rounded-xl rounded-tl-none border border-[var(--border-hairline)] flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 bg-[var(--accent)] rounded-full animate-bounce [animation-delay:-0.3s]" />
+                  <span className="w-1.5 h-1.5 bg-[var(--accent)] rounded-full animate-bounce [animation-delay:-0.15s]" />
+                  <span className="w-1.5 h-1.5 bg-[var(--accent)] rounded-full animate-bounce" />
                 </div>
               </div>
             )}
@@ -485,7 +485,7 @@ export const Chatbot: React.FC = () => {
               e.preventDefault();
               handleSendMessage();
             }}
-            className="p-3 bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-white/10 flex items-center gap-2 shrink-0"
+            className="p-3 bg-[var(--bg-surface)] border-t border-[var(--border-hairline)] flex items-center gap-2 shrink-0"
           >
             <button
               type="button"
@@ -493,7 +493,7 @@ export const Chatbot: React.FC = () => {
               className={`min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl transition-all border cursor-pointer shrink-0 ${
                 isListening
                   ? 'bg-emerald-500 text-zinc-950 border-emerald-400 animate-pulse'
-                  : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border-zinc-200 dark:border-white/10 hover:text-blue-600 dark:hover:text-cyan-400 hover:border-blue-400 dark:hover:border-cyan-400/50'
+                  : 'bg-[var(--bg-subtle)] text-[var(--text-secondary)] border-[var(--border-hairline)] hover:text-[var(--accent-text)] hover:border-[var(--accent)]/60'
               }`}
               title={isListening ? 'Listening... click to stop' : 'Speak to Rex by voice'}
               aria-label={isListening ? 'Stop voice input' : 'Start voice input'}
@@ -506,14 +506,14 @@ export const Chatbot: React.FC = () => {
               type="text"
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              placeholder={isListening ? 'Listening to your voice...' : 'Ask Rex about projects, SGPA, skills...'}
+              placeholder={isListening ? 'Listening to your voice...' : 'Ask Rex about projects, stack, automation...'}
               aria-label="Message to Rex"
-              className="min-h-[44px] flex-1 min-w-0 px-3 py-2 text-xs bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-white/10 rounded-xl text-zinc-900 dark:text-white placeholder:text-zinc-500 dark:placeholder:text-zinc-400 focus:outline-none focus:border-blue-500 dark:focus:border-cyan-400 transition-colors font-sans"
+              className="min-h-[44px] flex-1 min-w-0 px-3 py-2 text-xs bg-[var(--bg-subtle)] border border-[var(--border-hairline)] rounded-xl text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] transition-colors font-sans"
             />
             <button
               type="submit"
               disabled={!inputText.trim()}
-              className="min-w-[44px] min-h-[44px] flex items-center justify-center bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 disabled:opacity-40 text-white rounded-xl transition-all shadow-sm cursor-pointer shrink-0"
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center accent-gradient-bg disabled:opacity-40 text-white rounded-xl transition-all shadow-sm cursor-pointer shrink-0"
               aria-label="Send message"
             >
               <Send className="w-4 h-4" />

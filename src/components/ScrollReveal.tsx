@@ -7,7 +7,11 @@ interface ScrollRevealProps {
   className?: string;
 }
 
-// SSR-safe IntersectionObserver fade/slide-up reveal with stagger support and reduced-motion opt-out
+/**
+ * SSR-safe IntersectionObserver scroll reveal.
+ * Renders opacity: 1 in server-rendered HTML so search engines and initial paint
+ * are never blocked, and reveals lower sections smoothly on scroll.
+ */
 export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   children,
   delay = 0,
@@ -28,8 +32,7 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
     }
 
     const rect = el.getBoundingClientRect();
-    // Only hide elements that start well below the initial viewport so SSR & above-the-fold never flash
-    if (rect.top > window.innerHeight * 0.92) {
+    if (rect.top > window.innerHeight * 0.94) {
       setState('hidden');
     }
 
@@ -49,14 +52,14 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
 
   const hiddenTransform =
     direction === 'up'
-      ? 'translateY(16px)'
+      ? 'translate3d(0, 18px, 0)'
       : direction === 'down'
-      ? 'translateY(-16px)'
+      ? 'translate3d(0, -18px, 0)'
       : direction === 'left'
-      ? 'translateX(16px)'
+      ? 'translate3d(18px, 0, 0)'
       : direction === 'right'
-      ? 'translateX(-16px)'
-      : 'none';
+      ? 'translate3d(-18px, 0, 0)'
+      : 'translate3d(0, 0, 0)';
 
   return (
     <div
@@ -64,8 +67,8 @@ export const ScrollReveal: React.FC<ScrollRevealProps> = ({
       className={className}
       style={{
         opacity: state === 'visible' ? 1 : 0,
-        transform: state === 'visible' ? 'translate3d(0,0,0)' : hiddenTransform,
-        transition: `opacity 420ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 420ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
+        transform: state === 'visible' ? 'translate3d(0, 0, 0)' : hiddenTransform,
+        transition: `opacity 450ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 450ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
       }}
     >
       {children}

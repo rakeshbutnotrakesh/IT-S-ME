@@ -1,3 +1,5 @@
+import { portfolioConfig } from '../config/portfolioConfig';
+
 export interface PersonalInfo {
   name: string;
   firstName: string;
@@ -9,12 +11,13 @@ export interface PersonalInfo {
   academic: {
     degree: string;
     college: string;
-    sgpa: string;
+    expectedGraduation: string;
     focus: string;
   };
   roles: string[];
   interests: string[];
   contact: {
+    githubUsername: string;
     github: string;
     linkedin: string;
     portfolioUrl: string;
@@ -24,44 +27,27 @@ export interface PersonalInfo {
 }
 
 export const personalInfo: PersonalInfo = {
-  name: "Rakesh Kumar Mondal",
-  firstName: "Rakesh",
-  displayInitials: "RKM",
-  title: "Software Developer · Web Applications & Workflow Automation",
-  tagline: "Shipping Practical Web Software & Workflow Automation.",
-  shortIntro:
-    "I build web applications, client-side utilities, and workflow automation tools with Python, React, TypeScript, Docker, and n8n—backed by a BCA degree (9.65 SGPA).",
-  aboutText: [
-    "I'm Rakesh Kumar Mondal, a software developer building full-featured web applications, browser-local utilities, and automated workflows with Python, React, TypeScript, Docker, and n8n.",
-    "Across seven deployed web applications, I focus on practical engineering—combining Web Crypto security tooling, Canvas-based data structure visualizations, and clean responsive interfaces with core C, C++, Python, and Java fundamentals.",
-    "My academic background in Bachelor of Computer Applications (BCA, 9.65 SGPA) supports my daily hands-on work in software architecture, cybersecurity tooling, and workflow automation."
-  ],
+  name: portfolioConfig.profile.name,
+  firstName: portfolioConfig.profile.firstName,
+  displayInitials: portfolioConfig.profile.initials,
+  title: portfolioConfig.profile.title,
+  tagline: portfolioConfig.profile.heroHeadline,
+  shortIntro: portfolioConfig.profile.heroSubheadline,
+  aboutText: portfolioConfig.profile.aboutParagraphs,
   academic: {
-    degree: "Bachelor of Computer Applications (BCA)",
-    college: "[YOUR_COLLEGE_NAME]",
-    sgpa: "9.65",
-    focus: "Programming, Software Development, Web Engineering & Workflow Automation"
+    degree: portfolioConfig.education.degree,
+    college: portfolioConfig.education.college,
+    expectedGraduation: portfolioConfig.education.expectedGraduation,
+    focus: portfolioConfig.education.focus,
   },
-  roles: [
-    "Software Developer",
-    "Web Developer",
-    "Python & TypeScript Builder",
-    "Workflow Automation Developer"
-  ],
-  interests: [
-    "Programming",
-    "Software Development",
-    "Web Development",
-    "Python",
-    "Cybersecurity",
-    "Workflow Automation",
-    "Artificial Intelligence"
-  ],
+  roles: portfolioConfig.profile.rotatingRoles,
+  interests: portfolioConfig.profile.interests,
   contact: {
-    github: "https://github.com/rakeshbutnotrakesh",
-    linkedin: "[YOUR_LINKEDIN_URL]",
-    portfolioUrl: "https://portfolio-two-puce-hj49ocwerj.vercel.app/",
-    email: "rakeshkumarmondal51@gmail.com",
-    location: "India"
-  }
+    githubUsername: portfolioConfig.contact.githubUsername,
+    github: portfolioConfig.contact.githubUrl,
+    linkedin: portfolioConfig.contact.linkedinUrl,
+    portfolioUrl: portfolioConfig.contact.portfolioUrl,
+    email: portfolioConfig.contact.email,
+    location: portfolioConfig.education.location,
+  },
 };
