@@ -7,93 +7,59 @@ export interface JourneyMilestone {
 
 export const journeyMilestones: JourneyMilestone[] = [
   {
-    title: "Programming Fundamentals",
-    category: "Foundation",
-    summary: "Acquired core computer science fundamentals: memory management, logic building, data representation, and algorithmic thinking.",
-    keyLearnings: [
-      "Procedural programming logic and control flow",
-      "Pointers, structures, and arrays",
-      "Complexity analysis and algorithmic decomposition"
-    ]
+    title: 'Programming fundamentals',
+    category: 'Foundation',
+    summary:
+      'Built a strong grounding in logic building, control flow, memory concepts, and structured problem solving.',
+    keyLearnings: [],
   },
   {
-    title: "C & C++ Practice",
-    category: "Low-Level & OOP",
-    summary: "Deepened programming rigor through hands-on implementation of Data Structures and Object-Oriented Programming principles.",
-    keyLearnings: [
-      "Object-oriented design: inheritance, encapsulation, polymorphism",
-      "Custom linked lists, stacks, queues, and binary trees",
-      "Memory efficiency and compiling workflows"
-    ]
+    title: 'C and C++',
+    category: 'Core Languages',
+    summary:
+      'Practiced pointers, arrays, object-oriented programming, and foundational data structures.',
+    keyLearnings: [],
   },
   {
-    title: "Python Learning & Scripting",
-    category: "Languages",
-    summary: "Leveraged Python's expressive syntax to build practical utility scripts, file parsers, and data manipulation tools.",
-    keyLearnings: [
-      "Functional programming and list comprehensions",
-      "Working with JSON, CSV, and local file I/O",
-      "Rapid prototyping of algorithms and problem sets"
-    ]
+    title: 'Python exploration',
+    category: 'Scripting',
+    summary:
+      'Used Python for clean scripting, data handling, and experimenting with problem-solving workflows.',
+    keyLearnings: [],
   },
   {
-    title: "Web Development (HTML, CSS, JavaScript)",
-    category: "Frontend",
-    summary: "Transitioned to building interactive browser interfaces using modern semantic HTML5, responsive CSS, and ES6+ JavaScript.",
-    keyLearnings: [
-      "DOM manipulation, event bubbling, and async/await",
-      "Responsive layout engineering with Flexbox and Grid",
-      "Browser security boundaries and client-side storage"
-    ]
+    title: 'Web development',
+    category: 'Web Standards',
+    summary:
+      'Learned semantic HTML, responsive CSS layouts, and interactive browser behavior with JavaScript.',
+    keyLearnings: [],
   },
   {
-    title: "React & TypeScript Exploration",
-    category: "Modern Stack",
-    summary: "Embraced declarative component architecture, typed interfaces, and state-driven web applications.",
-    keyLearnings: [
-      "Type safety, interfaces, and strict TypeScript configurations",
-      "Custom React hooks, component lifecycles, and render optimization",
-      "Vite tooling, modular styles, and Tailwind CSS systems"
-    ]
+    title: 'React and TypeScript',
+    category: 'Frontend Engineering',
+    summary:
+      'Moved into component-based architecture, strict TypeScript interfaces, and Tailwind CSS styling.',
+    keyLearnings: [],
   },
   {
-    title: "Git & GitHub Workflow",
-    category: "Developer Tools",
-    summary: "Integrated industry-standard version control and collaborative Git workflows into daily coding practice.",
-    keyLearnings: [
-      "Branch management, atomic commits, and pull requests",
-      "Repository documentation, README drafting, and issue tracking",
-      "Automated deployments connected to cloud git repos"
-    ]
+    title: 'GitHub and version control',
+    category: 'Workflow',
+    summary:
+      'Adopted structured branching, commits, repository documentation, and deployment pipelines with Git and GitHub.',
+    keyLearnings: [],
   },
   {
-    title: "Docker & n8n Workflow Automation",
-    category: "Automation & DevOps",
-    summary: "Explored containerization and visual automation pipelines to connect APIs and eliminate repetitive manual workflows.",
-    keyLearnings: [
-      "Containerizing local environments with Docker",
-      "n8n node orchestration, webhook triggers, and data mappings",
-      "Self-hosted automation instances and micro-service testing"
-    ]
+    title: 'Docker and n8n',
+    category: 'Automation',
+    summary:
+      'Explored containerized local services with Docker and automated webhook pipelines using n8n.',
+    keyLearnings: [],
   },
   {
-    title: "AI-Powered Application Experiments",
-    category: "Modern Technology",
-    summary: "Explored prompt engineering, developer tools, and intelligent client-side interfaces in Google AI Studio.",
-    keyLearnings: [
-      "Human-computer interaction with AI-assisted software",
-      "Lightweight rule-based logic and structured local assistants",
-      "Rapid prototyping with modern AI dev environments"
-    ]
+    title: 'Practical software projects',
+    category: 'Application Building',
+    summary:
+      'Bringing ideas together into real browser tools, productivity platforms, and automation experiments.',
+    keyLearnings: [],
   },
-  {
-    title: "Cybersecurity Exploration",
-    category: "Security",
-    summary: "Studying network security fundamentals, browser cryptography, secure coding practices, and vulnerability prevention.",
-    keyLearnings: [
-      "Client-side cryptography with Web Crypto API",
-      "Password entropy evaluation and hashing algorithms (SHA-256)",
-      "Safe URL handling and defense against common web vulnerabilities"
-    ]
-  }
 ];

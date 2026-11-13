@@ -320,15 +320,13 @@ export const Chatbot: React.FC = () => {
             height: 'min(520px, calc(100dvh - 108px))',
             zIndex: 60,
           }}
-          className="flex flex-col bg-[var(--bg-surface)] border border-[var(--border-hairline)] rounded-xl shadow-2xl overflow-hidden animate-in fade-in slide-in-from-bottom-3 transition-all"
+          className="flex flex-col bg-[var(--bg-surface)] border border-[var(--border)] rounded-xl shadow-2xl overflow-hidden transition-all"
         >
-          {/* Minimalist Editorial Header */}
-          <div className="px-4 sm:px-5 py-3.5 bg-[#0b0b0c] text-[#f5f5f3] flex items-center justify-between border-b border-[var(--border-hairline)]">
+          {/* Minimalist Header */}
+          <div className="px-4 sm:px-5 py-3.5 bg-[#171717] dark:bg-[#1A1D20] text-[#F5F5F5] flex items-center justify-between border-b border-[var(--border)]">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-xl accent-gradient-bg p-[1.5px] flex items-center justify-center shrink-0">
-                <div className="w-full h-full bg-[#0b0b0c] rounded-[10px] flex items-center justify-center text-[var(--accent-start)]">
-                  <Bot className="w-4 h-4" />
-                </div>
+              <div className="w-8 h-8 rounded-lg bg-[#315EF5]/20 border border-[#7C9AFF]/40 flex items-center justify-center text-[#7C9AFF] shrink-0">
+                <Bot className="w-4 h-4" />
               </div>
 
               <div className="flex items-center gap-2">
@@ -346,9 +344,9 @@ export const Chatbot: React.FC = () => {
                 }}
                 title={voiceEnabled ? 'Mute Rex voice readout' : 'Enable Rex voice readout'}
                 aria-label={voiceEnabled ? 'Mute Rex voice readout' : 'Enable Rex voice readout'}
-                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-zinc-400 hover:text-[var(--accent-start)] rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-zinc-400 hover:text-[#7C9AFF] rounded-lg hover:bg-white/10 transition-colors cursor-pointer"
               >
-                {voiceEnabled ? <Volume2 className="w-4 h-4 text-[var(--accent-start)]" /> : <VolumeX className="w-4 h-4 text-zinc-500" />}
+                {voiceEnabled ? <Volume2 className="w-4 h-4 text-[#7C9AFF]" /> : <VolumeX className="w-4 h-4 text-zinc-500" />}
               </button>
               <button
                 type="button"
@@ -385,14 +383,14 @@ export const Chatbot: React.FC = () => {
           </div>
 
           {/* Quick Question Buttons Strip */}
-          <div className="px-3.5 py-2 bg-[var(--bg-subtle)] border-b border-[var(--border-hairline)] overflow-x-auto no-scrollbar flex items-center gap-1.5 shrink-0">
+          <div className="px-3.5 py-2 bg-[var(--bg-subtle)] border-b border-[var(--border)] overflow-x-auto no-scrollbar flex items-center gap-1.5 shrink-0">
             <span className="text-[10px] font-mono uppercase text-[var(--text-muted)] shrink-0">Quick ask:</span>
             {quickQuestions.map((q) => (
               <button
                 key={q.id}
                 type="button"
                 onClick={() => handleSendMessage(q.question)}
-                className="px-2.5 py-1 text-xs font-mono bg-[var(--bg-surface)] border border-[var(--border-hairline)] hover:border-[var(--accent)]/60 rounded-lg whitespace-nowrap text-[var(--text-primary)] transition-colors shrink-0 cursor-pointer"
+                className="px-2.5 py-1 text-xs font-mono bg-[var(--bg-surface)] border border-[var(--border)] hover:border-[var(--accent)] rounded-md whitespace-nowrap text-[var(--text-primary)] transition-colors shrink-0 cursor-pointer"
               >
                 {q.question}
               </button>
@@ -409,8 +407,8 @@ export const Chatbot: React.FC = () => {
                 <div
                   className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${
                     m.sender === 'user'
-                      ? 'accent-gradient-bg text-white'
-                      : 'bg-[var(--bg-subtle)] border border-[var(--border-hairline)] text-[var(--accent-text)]'
+                      ? 'bg-[var(--accent)] text-[var(--accent-fg)]'
+                      : 'bg-[var(--bg-subtle)] border border-[var(--border)] text-[var(--accent)]'
                   }`}
                 >
                   {m.sender === 'user' ? <User className="w-3.5 h-3.5" /> : <Bot className="w-3.5 h-3.5" />}
@@ -419,8 +417,8 @@ export const Chatbot: React.FC = () => {
                 <div
                   className={`max-w-[85%] p-3 rounded-xl space-y-1 relative ${
                     m.sender === 'user'
-                      ? 'accent-gradient-bg text-white rounded-tr-none'
-                      : 'bg-[var(--bg-subtle)] text-[var(--text-primary)] border border-[var(--border-hairline)] rounded-tl-none'
+                      ? 'bg-[var(--accent)] text-[var(--accent-fg)] rounded-tr-none'
+                      : 'bg-[var(--bg-subtle)] text-[var(--text-primary)] border border-[var(--border)] rounded-tl-none'
                   }`}
                 >
                   {m.sender === 'user' ? (
@@ -429,15 +427,15 @@ export const Chatbot: React.FC = () => {
                     <MarkdownMessage content={m.text} />
                   )}
 
-                  <div className="flex items-center justify-between gap-2 pt-1 border-t border-[var(--border-hairline)] mt-1.5">
+                  <div className="flex items-center justify-between gap-2 pt-1 border-t border-[var(--border)] mt-1.5">
                     {m.sender === 'rex' && (
                       <button
                         type="button"
                         onClick={() => handleSpeakMessage(m.id, m.text)}
                         className={`text-[10px] font-mono flex items-center gap-1 transition-colors cursor-pointer ${
                           speakingMessageId === m.id
-                            ? 'text-[var(--accent-text)] font-semibold animate-pulse'
-                            : 'text-[var(--text-muted)] hover:text-[var(--accent-text)]'
+                            ? 'text-[var(--accent)] font-semibold'
+                            : 'text-[var(--text-muted)] hover:text-[var(--accent)]'
                         }`}
                         title="Hear Rex speak this message"
                       >
@@ -447,7 +445,7 @@ export const Chatbot: React.FC = () => {
                     )}
                     <div
                       className={`text-[9.5px] font-mono text-right ml-auto ${
-                        m.sender === 'user' ? 'text-white/85' : 'text-[var(--text-muted)]'
+                        m.sender === 'user' ? 'opacity-80' : 'text-[var(--text-muted)]'
                       }`}
                     >
                       {m.timestamp}
@@ -459,10 +457,10 @@ export const Chatbot: React.FC = () => {
 
             {isTyping && (
               <div className="flex items-start gap-2.5">
-                <div className="w-7 h-7 rounded-lg bg-[var(--bg-subtle)] text-[var(--accent-text)] flex items-center justify-center shrink-0">
+                <div className="w-7 h-7 rounded-lg bg-[var(--bg-subtle)] text-[var(--accent)] flex items-center justify-center shrink-0">
                   <Bot className="w-3.5 h-3.5" />
                 </div>
-                <div className="p-3 bg-[var(--bg-subtle)] rounded-xl rounded-tl-none border border-[var(--border-hairline)] flex items-center gap-1.5">
+                <div className="p-3 bg-[var(--bg-subtle)] rounded-xl rounded-tl-none border border-[var(--border)] flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 bg-[var(--accent)] rounded-full animate-bounce [animation-delay:-0.3s]" />
                   <span className="w-1.5 h-1.5 bg-[var(--accent)] rounded-full animate-bounce [animation-delay:-0.15s]" />
                   <span className="w-1.5 h-1.5 bg-[var(--accent)] rounded-full animate-bounce" />
@@ -485,15 +483,15 @@ export const Chatbot: React.FC = () => {
               e.preventDefault();
               handleSendMessage();
             }}
-            className="p-3 bg-[var(--bg-surface)] border-t border-[var(--border-hairline)] flex items-center gap-2 shrink-0"
+            className="p-3 bg-[var(--bg-surface)] border-t border-[var(--border)] flex items-center gap-2 shrink-0"
           >
             <button
               type="button"
               onClick={handleToggleMic}
-              className={`min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl transition-all border cursor-pointer shrink-0 ${
+              className={`min-w-[44px] min-h-[44px] flex items-center justify-center rounded-lg transition-all border cursor-pointer shrink-0 ${
                 isListening
                   ? 'bg-emerald-500 text-zinc-950 border-emerald-400 animate-pulse'
-                  : 'bg-[var(--bg-subtle)] text-[var(--text-secondary)] border-[var(--border-hairline)] hover:text-[var(--accent-text)] hover:border-[var(--accent)]/60'
+                  : 'bg-[var(--bg-subtle)] text-[var(--text-secondary)] border-[var(--border)] hover:text-[var(--accent)] hover:border-[var(--accent)]'
               }`}
               title={isListening ? 'Listening... click to stop' : 'Speak to Rex by voice'}
               aria-label={isListening ? 'Stop voice input' : 'Start voice input'}
@@ -508,12 +506,12 @@ export const Chatbot: React.FC = () => {
               onChange={(e) => setInputText(e.target.value)}
               placeholder={isListening ? 'Listening to your voice...' : 'Ask Rex about projects, stack, automation...'}
               aria-label="Message to Rex"
-              className="min-h-[44px] flex-1 min-w-0 px-3 py-2 text-xs bg-[var(--bg-subtle)] border border-[var(--border-hairline)] rounded-xl text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] transition-colors font-sans"
+              className="min-h-[44px] flex-1 min-w-0 px-3 py-2 text-xs bg-[var(--bg-subtle)] border border-[var(--border)] rounded-lg text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] transition-colors font-sans"
             />
             <button
               type="submit"
               disabled={!inputText.trim()}
-              className="min-w-[44px] min-h-[44px] flex items-center justify-center accent-gradient-bg disabled:opacity-40 text-white rounded-xl transition-all shadow-sm cursor-pointer shrink-0"
+              className="min-w-[44px] min-h-[44px] flex items-center justify-center bg-[var(--accent)] disabled:opacity-40 text-[var(--accent-fg)] rounded-lg transition-opacity cursor-pointer shrink-0"
               aria-label="Send message"
             >
               <Send className="w-4 h-4" />

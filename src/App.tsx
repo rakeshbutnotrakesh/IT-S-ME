@@ -1,20 +1,17 @@
 import React, { useState } from 'react';
 import { MotionConfig } from 'framer-motion';
 import { useTheme } from './hooks/useTheme';
-import { Preloader } from './components/Preloader';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { About } from './components/About';
-import { Skills } from './components/Skills';
 import { Projects } from './components/Projects';
+import { Skills } from './components/Skills';
 import { Timeline } from './components/Timeline';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { Chatbot } from './components/Chatbot';
 import { ProjectDialog } from './components/ProjectDialog';
 import { ResumeModal } from './components/ResumeModal';
-import { ScrollProgressBar } from './components/ScrollProgressBar';
-import { CustomCursor } from './components/CustomCursor';
 import { ScrollReveal } from './components/ScrollReveal';
 import { ProjectItem } from './data/projects';
 
@@ -28,14 +25,11 @@ export default function App() {
       <div className="relative min-h-screen bg-[var(--bg-canvas)] text-[var(--text-primary)] transition-colors duration-200">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:rounded-lg accent-gradient-bg focus:text-white focus:text-xs focus:font-mono focus:shadow-lg"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-4 focus:py-2 focus:rounded-lg focus:text-xs focus:font-mono focus:shadow-lg"
+          style={{ backgroundColor: 'var(--accent)', color: 'var(--accent-fg)' }}
         >
           Skip to main content
         </a>
-
-        <Preloader />
-        <ScrollProgressBar />
-        <CustomCursor />
 
         <Navbar
           isDark={isDark}
@@ -44,18 +38,18 @@ export default function App() {
         />
 
         <main id="main-content" className="relative z-10">
-          <Hero onOpenResume={() => setResumeOpen(true)} />
+          <Hero />
 
           <ScrollReveal direction="up">
             <About />
           </ScrollReveal>
 
           <ScrollReveal direction="up">
-            <Skills />
+            <Projects onSelectProject={(project) => setSelectedProject(project)} />
           </ScrollReveal>
 
           <ScrollReveal direction="up">
-            <Projects onSelectProject={(project) => setSelectedProject(project)} />
+            <Skills />
           </ScrollReveal>
 
           <ScrollReveal direction="up">

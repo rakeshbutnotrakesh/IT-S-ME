@@ -3,55 +3,49 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --font-heading: "Bricolage Grotesque", system-ui, -apple-system, sans-serif;
-  --font-body: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  --font-heading: "Manrope", system-ui, -apple-system, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
 :root {
-  --bg-canvas: #f8f7f4;
-  --bg-surface: #ffffff;
-  --bg-subtle: #efede7;
-  --bg-elevated: #ffffff;
-  --border-hairline: rgba(17, 17, 19, 0.11);
-  --border-strong: rgba(17, 17, 19, 0.24);
-  --text-primary: #111113;
-  --text-secondary: #4a4a52;
-  --text-muted: #686872;
-  --accent-start: #e1391c;
-  --accent-end: #d97706;
-  --accent: #e1391c;
-  --accent-text: #c82e13;
-  --accent-fg: #ffffff;
-  --accent-tint: rgba(225, 57, 28, 0.08);
-  --accent-glow: rgba(225, 57, 28, 0.14);
-  --secondary-tint: rgba(217, 119, 6, 0.09);
-  --nav-bg: rgba(248, 247, 244, 0.86);
-  --grid-line: rgba(17, 17, 19, 0.045);
-  --noise-opacity: 0.025;
+  --bg-canvas: #F8F8F5;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F1F1EC;
+  --bg-elevated: #FFFFFF;
+  --border: #E7E7E2;
+  --border-hairline: #E7E7E2;
+  --border-strong: #D4D4CC;
+  --text-primary: #171717;
+  --text-secondary: #595959;
+  --text-muted: #737373;
+  --accent: #315EF5;
+  --accent-hover: #254EDB;
+  --accent-text: #315EF5;
+  --accent-fg: #FFFFFF;
+  --accent-tint: rgba(49, 94, 245, 0.08);
+  --nav-bg: rgba(248, 248, 245, 0.9);
+  --grid-line: rgba(23, 23, 23, 0.04);
 }
 
 .dark {
-  --bg-canvas: #0b0b0c;
-  --bg-surface: #131316;
-  --bg-subtle: #1a1a1f;
-  --bg-elevated: #17171b;
-  --border-hairline: rgba(245, 245, 243, 0.1);
-  --border-strong: rgba(245, 245, 243, 0.22);
-  --text-primary: #f5f5f3;
-  --text-secondary: #b0b0b8;
-  --text-muted: #8e8e98;
-  --accent-start: #ff4d2e;
-  --accent-end: #f59e0b;
-  --accent: #ff4d2e;
-  --accent-text: #ff6b4a;
-  --accent-fg: #ffffff;
-  --accent-tint: rgba(255, 77, 46, 0.11);
-  --accent-glow: rgba(255, 77, 46, 0.18);
-  --secondary-tint: rgba(245, 158, 11, 0.11);
-  --nav-bg: rgba(11, 11, 12, 0.84);
-  --grid-line: rgba(245, 245, 243, 0.032);
-  --noise-opacity: 0.032;
+  --bg-canvas: #111315;
+  --bg-surface: #1A1D20;
+  --bg-subtle: #202428;
+  --bg-elevated: #1A1D20;
+  --border: #262A2E;
+  --border-hairline: #262A2E;
+  --border-strong: #373D43;
+  --text-primary: #F5F5F5;
+  --text-secondary: #A1A7B0;
+  --text-muted: #8B929B;
+  --accent: #7C9AFF;
+  --accent-hover: #96AEFF;
+  --accent-text: #7C9AFF;
+  --accent-fg: #111315;
+  --accent-tint: rgba(124, 154, 255, 0.12);
+  --nav-bg: rgba(17, 19, 21, 0.9);
+  --grid-line: rgba(245, 245, 245, 0.04);
 }
 
 html {
@@ -63,7 +57,7 @@ body {
   font-family: var(--font-body);
   background-color: var(--bg-canvas);
   color: var(--text-primary);
-  font-size: clamp(0.9375rem, 0.92rem + 0.15vw, 1.0625rem);
+  font-size: clamp(0.9375rem, 0.92rem + 0.12vw, 1.0625rem);
   line-height: 1.65;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -79,46 +73,29 @@ body {
 
 .heading-hero {
   font-family: var(--font-heading);
-  font-size: clamp(2.5rem, 5.5vw, 4.75rem);
-  line-height: 0.98;
-  letter-spacing: -0.035em;
+  font-size: clamp(2.25rem, 4.5vw, 3.85rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
   text-wrap: balance;
 }
 
 .heading-section {
   font-family: var(--font-heading);
-  font-size: clamp(1.85rem, 3.2vw, 2.75rem);
-  line-height: 1.1;
-  letter-spacing: -0.028em;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
   text-wrap: balance;
 }
 
-.accent-gradient-bg {
-  background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
-}
-
-.accent-gradient-text {
-  background: linear-gradient(135deg, var(--accent-start), var(--accent-end));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* Subtle architectural draftsmanship grid */
+/* Subtle architectural draftsmanship grid for geometric profile placeholder */
 .bg-grid-architect {
-  background-size: 56px 56px;
+  background-size: 32px 32px;
   background-image:
     linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
     linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
 }
 
-/* Subtle film/paper grain overlay */
-.bg-noise-overlay {
-  opacity: var(--noise-opacity);
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* Animated nav link underline */
+/* Clean underline transition for nav links */
 .nav-link-underline {
   position: relative;
 }
@@ -129,33 +106,16 @@ body {
   left: 0;
   right: 0;
   bottom: 8px;
-  height: 2px;
-  border-radius: 9999px;
-  background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+  height: 1.5px;
+  background-color: var(--accent);
   transform: scaleX(0);
   transform-origin: left center;
-  transition: transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav-link-underline:hover::after,
 .nav-link-underline[aria-current="location"]::after {
   transform: scaleX(1);
-}
-
-@keyframes marquee-scroll {
-  0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(-50%, 0, 0); }
-}
-
-.animate-marquee {
-  display: flex;
-  width: max-content;
-  animation: marquee-scroll 36s linear infinite;
-}
-
-.marquee-wrapper:hover .animate-marquee,
-.marquee-wrapper:focus-within .animate-marquee {
-  animation-play-state: paused;
 }
 
 ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -173,7 +133,6 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .animate-marquee { animation: none !important; width: auto; flex-wrap: wrap; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

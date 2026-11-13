@@ -2,70 +2,103 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=1200, initial-scale=1.0" />
-    <title>OG Social Preview Template (1200x630)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OG Social Preview Template — Rakesh Kumar Mondal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
     <style>
       * { box-sizing: border-box; margin: 0; padding: 0; }
       body {
-        width: 1200px;
-        height: 630px;
-        overflow: hidden;
-        background: #0b0b0c;
-        color: #f5f5f3;
-        font-family: 'Bricolage Grotesque', system-ui, -apple-system, sans-serif;
+        background: #E7E7E2;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 48px;
+        min-height: 100vh;
+        font-family: "Inter", sans-serif;
       }
       .card {
-        width: 100%;
-        height: 100%;
-        border-radius: 20px;
-        border: 2px solid rgba(245, 245, 243, 0.14);
-        background: #131316;
-        padding: 56px 60px;
+        width: 1200px;
+        height: 630px;
+        background: #F8F8F5;
+        padding: 48px;
+        display: flex;
+      }
+      .frame {
+        flex: 1;
+        background: #FFFFFF;
+        border: 1.5px solid #E7E7E2;
+        border-radius: 16px;
+        padding: 56px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
       }
-      .top { display: flex; align-items: center; gap: 20px; }
-      .badge {
-        width: 72px; height: 72px; border-radius: 16px;
-        background: linear-gradient(135deg, #ff4d2e, #f59e0b);
-        display: flex; align-items: center; justify-content: center;
-        font-weight: 800; font-size: 24px; color: #fff;
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 28px;
+        border-bottom: 1px solid #E7E7E2;
       }
-      .kicker { font-family: ui-monospace, monospace; color: #ff6b4a; font-size: 20px; font-weight: 600; }
-      .sub { font-family: ui-monospace, monospace; color: #b0b0b8; font-size: 18px; margin-top: 4px; }
-      h1 { font-size: 64px; font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; }
-      .role { font-size: 30px; color: #b0b0b8; margin-top: 14px; font-weight: 500; }
-      .stack {
-        border-top: 1px solid rgba(245,245,243,0.12);
+      .logo {
+        font-family: "Manrope", sans-serif;
+        font-size: 32px;
+        font-weight: 800;
+        color: #171717;
+        letter-spacing: -0.03em;
+      }
+      .logo span { color: #315EF5; }
+      .role {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 16px;
+        color: #737373;
+      }
+      h1 {
+        font-family: "Manrope", sans-serif;
+        font-size: 66px;
+        font-weight: 800;
+        color: #171717;
+        letter-spacing: -0.03em;
+        line-height: 1.05;
+      }
+      .sub {
+        font-size: 28px;
+        color: #595959;
+        margin-top: 16px;
+      }
+      .sub span { color: #315EF5; font-weight: 600; }
+      .bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         padding-top: 28px;
-        display: flex; justify-content: space-between; align-items: center;
-        font-family: ui-monospace, monospace;
+        border-top: 1px solid #E7E7E2;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 18px;
       }
-      .tech { color: #ff6b4a; font-size: 22px; font-weight: 600; }
-      .url { color: #8e8e98; font-size: 18px; }
+      .stack { color: #315EF5; font-weight: 500; }
+      .url { color: #737373; }
     </style>
   </head>
   <body>
     <div class="card">
-      <div class="top">
-        <div class="badge">RKM</div>
-        <div>
-          <div class="kicker">SOFTWARE DEVELOPER PORTFOLIO</div>
-          <div class="sub">BCA · Swami Vivekananda University (2029)</div>
+      <div class="frame">
+        <div class="top">
+          <div class="logo">RKM<span>.</span></div>
+          <div class="role">BCA STUDENT · DEVELOPER · AUTOMATION ENTHUSIAST</div>
         </div>
-      </div>
-      <div>
-        <h1>Rakesh Kumar Mondal</h1>
-        <p class="role">Engineering Practical Web Software &amp; Automated Workflows</p>
-      </div>
-      <div class="stack">
-        <span class="tech">Python · React · TypeScript · Docker · n8n</span>
-        <span class="url">portfolio-two-puce-hj49ocwerj.vercel.app</span>
+        <div>
+          <h1>Rakesh Kumar Mondal</h1>
+          <p class="sub">Building thoughtful digital experiences through <span>code</span>.</p>
+        </div>
+        <div class="bottom">
+          <div class="stack">C / C++ · Python · React · TypeScript · Docker · n8n</div>
+          <div class="url">portfolio-two-puce-hj49ocwerj.vercel.app</div>
+        </div>
       </div>
     </div>
   </body>

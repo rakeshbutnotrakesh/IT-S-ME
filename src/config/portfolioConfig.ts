@@ -1,19 +1,11 @@
-import imgFintech from '../assets/images/project_fintech_os_1793976471893.jpg';
-import imgSpatial from '../assets/images/hero_abstract_spatial_1793976472134.jpg';
-import imgCommerce from '../assets/images/project_avant_commerce_1793976472540.jpg';
-import imgCanvas from '../assets/images/project_ai_canvas_1793976473412.jpg';
-
-export type ProjectStatus = 'Completed' | 'In Development' | 'Planned';
+export type ProjectStatus = 'Live' | 'In Development' | 'Experimental' | 'Planned';
 
 export interface ProjectConfigItem {
   id: string;
+  indexNumber: string;
   name: string;
   category: string;
-  featured?: boolean;
   description: string;
-  problem: string;
-  solution: string;
-  result: string;
   detailedOverview?: string;
   techStack: string[];
   status: ProjectStatus;
@@ -21,7 +13,7 @@ export interface ProjectConfigItem {
   liveUrl?: string;
   demoNote?: string;
   highlights: string[];
-  coverImage: string;
+  previewType: 'portfolio' | 'fileforge' | 'civicdesk' | 'lifeos' | 'cybersafe' | 'n8n';
 }
 
 export interface CertificationOrAchievement {
@@ -37,23 +29,17 @@ export interface CertificationOrAchievement {
 
 /**
  * ============================================================================
- * CENTRAL PORTFOLIO CONFIGURATION — EDIT ONLY THIS FILE TO UPDATE YOUR SITE
+ * CENTRAL PORTFOLIO CONFIGURATION — EDIT HERE TO UPDATE PROFILE & LINKS
  * ============================================================================
- * Replace any [PLACEHOLDER] values below with your own details:
- * - [GITHUB_USERNAME] -> your GitHub handle (currently set to rakeshbutnotrakesh)
- * - [YOUR_COLLEGE_NAME] -> your college or university name
- * - [EXPECTED_GRADUATION_YEAR] -> e.g. "2027"
- * - [YOUR_LINKEDIN_URL] -> your full LinkedIn profile URL
- * - [YOUR_FORMSPREE_ENDPOINT] -> e.g. "https://formspree.io/f/xxxxxxxx"
- * - [BOOKING_CALENDAR_URL] -> Cal.com / Calendly link (optional; defaults to email)
+ * Editable fields for email, LinkedIn, Formspree endpoint, and resume PDF.
  */
 export const portfolioConfig = {
   meta: {
     siteTitle: 'Rakesh Kumar Mondal | Software Developer Portfolio',
     siteDescription:
-      'Software developer building high-speed web apps, browser security utilities, and n8n workflow automation with Python, React, TypeScript, and Docker.',
+      'Portfolio of Rakesh Kumar Mondal, a BCA student building practical web applications, browser security utilities, and workflow automation systems.',
     canonicalUrl: 'https://portfolio-two-puce-hj49ocwerj.vercel.app/',
-    lastUpdated: 'November 2026',
+    lastUpdated: '2026',
   },
 
   profile: {
@@ -61,281 +47,200 @@ export const portfolioConfig = {
     shortName: 'Rakesh Mondal',
     firstName: 'Rakesh',
     initials: 'RKM',
-    title: 'Software Developer · Web Apps & Workflow Automation',
-    heroKicker: 'Software Developer · Available for Internships & Junior Roles',
-    heroHeadline: 'I engineer fast web software and automated workflows.',
-    heroSubheadline:
-      'Building React & TypeScript interfaces, client-side cryptography utilities, and self-hosted Docker + n8n automation systems.',
-    rotatingRoles: [
-      'React & TypeScript Interfaces',
-      'n8n & Docker Automation',
-      'Browser Security Utilities',
-      'Python Scripting & Tooling',
-    ],
-    avatarPlaceholderLabel: '[ADD YOUR PROFILE PHOTO]',
+    heroKicker: "HELLO, I'M RAKESH",
+    heroHeadlinePrefix: 'Building thoughtful digital experiences through',
+    heroHeadlineAccent: 'code',
+    heroHeadlineSuffix: '.',
+    heroDescription:
+      "I'm Rakesh Kumar Mondal, a BCA student passionate about software development, web technologies and automation. I enjoy transforming ideas into practical digital solutions.",
+    roleLine: 'BCA Student · Developer · Automation Enthusiast',
+    title: 'BCA Student · Developer · Automation Enthusiast',
+    avatarUrl: '/assets/aistudio/photo_84d49c99.jpeg',
+    avatarPlaceholderLabel: 'Profile photo placeholder',
+    heroTechLabels: ['C / C++', 'Python', 'React', 'TypeScript', 'Docker', 'n8n'],
     aboutParagraphs: [
-      "I'm Rakesh Kumar Mondal, a BCA student and software developer focused on building practical web applications, browser-local tools, and reliable automation systems.",
-      'Across seven live Vercel deployments, I solve real user workflows end-to-end—engineering Web Crypto security toolkits, Canvas data-structure visualizers, and offline-first productivity apps backed by C, C++, Python, and Java fundamentals.',
-      'Beyond frontend interfaces, I run self-hosted Docker and n8n automation pipelines to connect webhooks, transform payloads, and remove repetitive manual work.',
+      "I'm a Bachelor of Computer Applications student interested in building software, exploring modern technologies and solving practical problems.",
+      'My learning journey includes programming, web development, automation and experimenting with different tools to understand how technology works.',
+      'I enjoy learning by building projects, testing ideas and continuously improving my technical abilities.',
+      'My goal is to grow as a developer and create useful digital products that solve real-world problems.',
     ],
     interests: [
-      'Software Engineering',
-      'Web Development',
+      'Cybersecurity',
       'Workflow Automation',
-      'Python Scripting',
-      'Cybersecurity Tooling',
-      'Algorithms & Data Structures',
+      'Artificial Intelligence',
+      'Data Structures and Algorithms',
+    ],
+    rotatingRoles: [
+      'Software Development',
+      'Web Technologies',
+      'Workflow Automation',
     ],
   },
 
-  // Clean education block: degree, college, and expected graduation year (no scores/grades)
   education: {
-    degree: 'Bachelor of Computer Applications (BCA)',
+    degree: 'Bachelor of Computer Applications',
     college: 'Swami Vivekananda University',
     expectedGraduation: '2029',
-    location: 'India',
-    focus: 'Programming Fundamentals, Data Structures, Web Engineering & Workflow Automation',
+    academicAchievement: 'SGPA 9.65',
+    focus: 'Software Development & Automation',
+    location: 'West Bengal, India',
   },
 
   contact: {
+    // Editable email & LinkedIn profile configuration
     email: 'rakeshkumarmondal51@gmail.com',
-    // Set to your GitHub username — used by GitHub REST API auto-fetch
-    githubUsername: 'rakeshbutnotrakesh', // Replace if changing [GITHUB_USERNAME]
+    githubUsername: 'rakeshbutnotrakesh',
     githubUrl: 'https://github.com/rakeshbutnotrakesh',
     linkedinUrl: 'https://www.linkedin.com/in/rakesh-kumar-mondal-0a46b236b/',
     portfolioUrl: 'https://portfolio-two-puce-hj49ocwerj.vercel.app/',
-    // Optional Cal.com / Calendly link; fallback opens direct email composer
-    bookingUrl: '[BOOKING_CALENDAR_URL]',
-    // Optional Formspree endpoint e.g. "https://formspree.io/f/your_form_id"
+    // Optional Formspree endpoint (leave placeholder if no backend email service is connected)
     formspreeEndpoint: '[YOUR_FORMSPREE_ENDPOINT]',
-    // Offline static PDF placed in /public/resume.pdf (falls back to clean downloadable summary)
+    // Static PDF path checked dynamically before showing "Download Resume" in Hero
     resumePdfPath: '/resume.pdf',
   },
 
   github: {
-    // Repository names pinned to top of the Open-Source Repositories showcase
-    pinnedRepos: [
-      'CyberSafe',
-      'LifeOS',
-      'FileForge',
-      'CivicDesk',
-      'Vault',
-      'AlgoVision',
-    ],
+    pinnedRepos: ['CyberSafe', 'LifeOS', 'FileForge', 'CivicDesk'],
     maxReposToShow: 6,
   },
 
-  stats: [
-    { id: 'apps', target: 7, suffix: '+', label: 'Live Deployed Web Apps' },
-    { id: 'tech', target: 17, suffix: '', label: 'Core Languages & Tools' },
-    { id: 'builds', target: 8, suffix: '', label: 'Production & Automation Builds' },
-  ],
-
   featuredProjects: [
     {
-      id: 'cybersafe',
-      name: 'CyberSafe',
-      category: 'Cybersecurity',
-      featured: true,
+      id: 'personal-portfolio',
+      indexNumber: '01',
+      name: 'Personal Developer Portfolio',
+      category: 'Web Application',
       description:
-        'Browser-native security toolkit for password entropy analysis, configurable credential generation, URL inspection, and local SHA-256 checksums.',
-      problem:
-        'Users frequently upload sensitive files or paste passwords into untrusted third-party web tools just to check hashes or entropy.',
-      solution:
-        'Engineered a zero-upload security suite powered by the browser Web Crypto API so hashing, entropy math, and URL parsing execute entirely in memory.',
-      result:
-        'Deployed live on Vercel with instant sub-millisecond SHA-256 verification and zero server data exposure.',
+        'A personal website showcasing my development journey, technical interests and projects.',
       detailedOverview:
-        'An educational security utility powered by the native Web Crypto API. Users compute local SHA-256 file checksums, evaluate password entropy, and inspect URL components for suspicious patterns without uploading files.',
-      techStack: ['React', 'TypeScript', 'Web Crypto API', 'Tailwind CSS'],
-      status: 'Completed',
-      githubUrl: 'https://github.com/rakeshbutnotrakesh',
-      liveUrl: 'https://cybersafe-eosin-five.vercel.app/',
+        'A minimalist editorial portfolio built with React, TypeScript, and Tailwind CSS, featuring clean typography, light/dark theme persistence, interactive project modals, and static HTML prerendering for search engines.',
+      techStack: ['React', 'TypeScript', 'Tailwind CSS', 'Vite'],
+      status: 'Live',
+      liveUrl: 'https://portfolio-two-puce-hj49ocwerj.vercel.app/',
       highlights: [
-        'Zero-upload client-side SHA-256 file checksum verification',
-        'Real-time password entropy analyzer & customizable generator',
-        'URL structure & phishing-pattern inspector',
+        'Swiss-inspired editorial typography and responsive grid layout',
+        'Persistent light and dark color scheme switching',
+        'Static HTML prerendering and complete SEO metadata',
       ],
-      coverImage: imgFintech,
+      previewType: 'portfolio',
     },
     {
       id: 'fileforge',
+      indexNumber: '02',
       name: 'FileForge',
-      category: 'Productivity & Utilities',
-      featured: true,
+      category: 'Browser Utility',
       description:
-        'Client-side document and image workspace for resizing, cropping, PDF utilities, and passport photo formatting.',
-      problem:
-        'Simple document formatting and passport photo cropping often force users onto ad-heavy websites requiring remote file uploads.',
-      solution:
-        'Built an offline-capable Canvas API and Vite web utility that processes images and documents locally inside the browser viewport.',
-      result:
-        'Shipped fast browser-local workflows handling resizing, aspect presets, and document helpers without external storage.',
+        'An all-in-one file conversion and passport photo processing application.',
       detailedOverview:
-        'A privacy-focused client-side utility suite engineered to process images and documents directly in the browser using modern Web and Canvas APIs so sensitive files stay on the user device.',
-      techStack: ['React', 'TypeScript', 'Vite', 'Canvas API'],
-      status: 'Completed',
-      githubUrl: 'https://github.com/rakeshbutnotrakesh',
+        'A client-side utility focused on formatting images, resizing dimensions, and preparing passport-ready photos directly inside the browser using Canvas and modern Web APIs.',
+      techStack: ['React', 'TypeScript', 'Canvas API', 'Vite'],
+      status: 'In Development',
       liveUrl: 'https://fileforge-jet.vercel.app/',
       highlights: [
-        '100% browser-local Canvas image processing',
-        'Precision passport-size cropping and DPI-ready sizing',
-        'Client-side PDF & document workflow helpers',
+        'Browser-local image resizing and cropping without external uploads',
+        'Passport-size aspect ratio presets and print formatting helpers',
+        'Clean modular workspace built with TypeScript',
       ],
-      coverImage: imgCommerce,
-    },
-    {
-      id: 'algovision',
-      name: 'AlgoVision',
-      category: 'Computer Science & DSA',
-      featured: true,
-      description:
-        'Interactive sorting and graph pathfinding visualizer with live step controls and operation counters.',
-      problem:
-        'Understanding recursive sorting splits and graph heuristic exploration from static textbook diagrams is unintuitive.',
-      solution:
-        'Implemented step-interpolated visualizations for Quick, Merge, Bubble, Heap sort and Dijkstra / A* pathfinding with live speed sliders.',
-      result:
-        'Created a responsive interactive CS lab used for hands-on algorithm analysis and complexity comparison.',
-      detailedOverview:
-        'An educational computer science tool built to visualize how classic sorting and pathfinding algorithms operate in real time, complete with speed controls and comparison tracking.',
-      techStack: ['React', 'TypeScript', 'Canvas API', 'Algorithms'],
-      status: 'Completed',
-      githubUrl: 'https://github.com/rakeshbutnotrakesh',
-      liveUrl: 'https://algovision-sand.vercel.app/',
-      highlights: [
-        'Animated sorting algorithms (Quick, Merge, Bubble, Heap)',
-        'Interactive grid pathfinding (Dijkstra, A* Search)',
-        'Live comparison & step telemetry controls',
-      ],
-      coverImage: imgCanvas,
-    },
-    {
-      id: 'n8n-automation-workflows',
-      name: 'n8n Automation Workflows',
-      category: 'Automation & Backend',
-      featured: true,
-      description:
-        'Self-hosted Docker + n8n automation pipelines connecting webhooks, scheduled triggers, and JSON transformations.',
-      problem:
-        'Repetitive webhook normalization, alert routing, and scheduled data checks consume valuable engineering time when done manually.',
-      solution:
-        'Containerized n8n instances via Docker Compose and authored modular JavaScript transformation nodes for reliable event-driven flows.',
-      result:
-        'Built reproducible, self-hosted automation blueprints that eliminate manual payload processing without SaaS lock-in.',
-      detailedOverview:
-        'A self-hosted collection of n8n workflows running inside Docker containers to automate repetitive tasks, transform webhook payloads, and test automated notification pipelines.',
-      techStack: ['n8n', 'Docker', 'JavaScript', 'Webhooks'],
-      status: 'In Development',
-      githubUrl: 'https://github.com/rakeshbutnotrakesh',
-      demoNote: 'Self-hosted locally via Docker — no public web demo is hosted.',
-      highlights: [
-        'Containerized Docker + n8n runtime setup',
-        'Custom JS payload parsers & webhook listeners',
-        'Scheduled alert & synchronization pipelines',
-      ],
-      coverImage: imgSpatial,
-    },
-    {
-      id: 'lifeos',
-      name: 'LifeOS',
-      category: 'Productivity & Utilities',
-      featured: false,
-      description:
-        'Unified personal workspace organizing tasks, study plans, habit streaks, expenses, and milestone tracking.',
-      problem:
-        'Students and builders juggle scattered notes, timers, and spreadsheets across disconnected apps.',
-      solution:
-        'Consolidated daily planning, study schedules, and habit streaks into a single local-first React workspace.',
-      result:
-        'Instant zero-latency state updates saved cleanly in browser LocalStorage.',
-      detailedOverview:
-        'An integrated personal workspace consolidating daily task lists, study revision planning, habit streaks, and goal milestones inside a clean local-first interface.',
-      techStack: ['React', 'TypeScript', 'Tailwind CSS', 'LocalStorage'],
-      status: 'Completed',
-      githubUrl: 'https://github.com/rakeshbutnotrakesh',
-      liveUrl: 'https://lifeos-puce-theta.vercel.app/',
-      highlights: [
-        'Unified task, study & habit tracker',
-        'Instant LocalStorage state persistence',
-        'Clean keyboard-friendly dashboard layout',
-      ],
-      coverImage: imgSpatial,
-    },
-    {
-      id: 'vault',
-      name: 'Vault',
-      category: 'Cybersecurity',
-      featured: false,
-      description:
-        'Privacy-first digital vault for AES-GCM client-side encrypted notes and developer snippets.',
-      problem:
-        'Cloud note tools store plain or server-decrypted snippets, risking exposure of sensitive keys and notes.',
-      solution:
-        'Used AES-GCM encryption through the browser Web Crypto API so secrets never leave the device unencrypted.',
-      result:
-        'Delivered a lightweight encrypted storage app with zero external analytics or third-party servers.',
-      detailedOverview:
-        'A client-side cryptographic storage app designed to encrypt private notes and credentials right inside the browser using the Web Crypto API without external telemetry.',
-      techStack: ['React', 'TypeScript', 'Web Crypto API', 'Tailwind CSS'],
-      status: 'Completed',
-      githubUrl: 'https://github.com/rakeshbutnotrakesh',
-      liveUrl: 'https://vault-ruby-theta.vercel.app/',
-      highlights: [
-        'Browser-native AES-GCM symmetric encryption',
-        'Structured developer snippet organization',
-        'Zero external network telemetry',
-      ],
-      coverImage: imgFintech,
+      previewType: 'fileforge',
     },
     {
       id: 'civicdesk',
+      indexNumber: '03',
       name: 'CivicDesk',
-      category: 'Community & Web Apps',
-      featured: false,
+      category: 'Civic Web App',
       description:
-        'Structured community issue tracker allowing residents to log, prioritize, and monitor neighborhood repairs.',
-      problem:
-        'Local infrastructure complaints get buried in unorganized chat threads without clear priority or resolution history.',
-      solution:
-        'Built a category-driven issue logger with priority filters and status progression persisted locally.',
-      result:
-        'Live responsive web app enabling clear issue prioritization on both mobile and desktop screens.',
+        'A local community issue management platform for reporting and tracking neighbourhood problems.',
       detailedOverview:
-        'A civic issue logger enabling residents to record local infrastructure concerns (such as streetlights, road damage, or sanitation issues) with priority levels, category filters, and local persistence.',
+        'A civic reporting application structured to help residents log neighborhood issues, assign categories and priority levels, and follow resolution states in one organized interface.',
       techStack: ['React', 'TypeScript', 'Tailwind CSS', 'LocalStorage'],
-      status: 'Completed',
-      githubUrl: 'https://github.com/rakeshbutnotrakesh',
+      status: 'In Development',
       liveUrl: 'https://civicdesk-gamma.vercel.app/',
       highlights: [
-        'Priority tagging & category filtering',
-        'Offline-resilient LocalStorage persistence',
-        'Clean mobile-first reporting flow',
+        'Category filtering and issue priority classification',
+        'Structured status tracking for neighborhood maintenance',
+        'Responsive interface across mobile and desktop screens',
       ],
-      coverImage: imgCanvas,
+      previewType: 'civicdesk',
+    },
+    {
+      id: 'lifeos',
+      indexNumber: '04',
+      name: 'LifeOS',
+      category: 'Productivity',
+      description:
+        'A personal productivity platform for managing tasks, studies, habits and finances.',
+      detailedOverview:
+        'A unified daily organizer designed to track study plans, daily tasks, habit streaks, and personal expense records within a single local-first workspace.',
+      techStack: ['React', 'TypeScript', 'Tailwind CSS', 'LocalStorage'],
+      status: 'In Development',
+      liveUrl: 'https://lifeos-puce-theta.vercel.app/',
+      highlights: [
+        'Consolidated task management, study planning, and habit tracking',
+        'Personal expense logging and milestone overview',
+        'Fast local persistence in browser storage',
+      ],
+      previewType: 'lifeos',
+    },
+    {
+      id: 'cybersafe',
+      indexNumber: '05',
+      name: 'CyberSafe',
+      category: 'Security Utility',
+      description:
+        'A browser-based cybersecurity toolkit featuring password analysis, URL analysis and file hashing.',
+      detailedOverview:
+        'An educational security toolkit utilizing the native browser Web Crypto API for local SHA-256 checksum computation, password entropy evaluation, and structured URL pattern inspection.',
+      techStack: ['React', 'TypeScript', 'Web Crypto API', 'Tailwind CSS'],
+      status: 'In Development',
+      liveUrl: 'https://cybersafe-eosin-five.vercel.app/',
+      highlights: [
+        'Client-side SHA-256 file checksum calculation',
+        'Real-time password strength and entropy feedback',
+        'URL component breakdown and inspection tools',
+      ],
+      previewType: 'cybersafe',
+    },
+    {
+      id: 'n8n-automation-workflows',
+      indexNumber: '06',
+      name: 'n8n Automation Workflows',
+      category: 'Workflow Automation',
+      description:
+        'Practical workflow automation experiments using n8n, Docker and related technologies.',
+      detailedOverview:
+        'Self-hosted Docker Compose experiments running n8n automation nodes to connect webhooks, parse JSON payloads, and automate routine digital workflows locally.',
+      techStack: ['n8n', 'Docker', 'JavaScript', 'Webhooks'],
+      status: 'Experimental',
+      demoNote: 'Runs locally in Docker containers — no public hosted demo.',
+      highlights: [
+        'Self-hosted n8n runtime managed with Docker',
+        'Webhook trigger handling and payload transformation nodes',
+        'Automated scheduling and routine task experiments',
+      ],
+      previewType: 'n8n',
     },
   ] as ProjectConfigItem[],
 
   certificationsAndAchievements: [
     {
-      id: 'deployed-apps',
-      metric: '7 Live',
-      title: 'Production Vercel Web Applications',
-      issuer: 'Vercel · Independent Engineering',
-      year: '2025 – 2026',
+      id: 'academic-sgpa',
+      metric: 'SGPA 9.65',
+      title: 'Bachelor of Computer Applications',
+      issuer: 'Swami Vivekananda University',
+      year: 'Ongoing',
       description:
-        'Designed, engineered, and shipped seven responsive React & TypeScript applications covering cybersecurity, client-side file utilities, DSA visualization, and productivity.',
-      badge: 'Shipping Proof',
+        'Consistent academic performance across core programming, computer science fundamentals, and web technology coursework.',
+      badge: 'Academic Achievement',
     },
     {
-      id: 'automation-lab',
-      metric: 'n8n + Docker',
-      title: 'Self-Hosted Workflow Automation Architecture',
-      issuer: 'Dockerized Local Infrastructure',
+      id: 'practical-builds',
+      metric: '6 Projects',
+      title: 'Web Applications & Automation Lab',
+      issuer: 'Independent Learning',
       year: '2025 – 2026',
       description:
-        'Built automated webhook orchestration and data-transformation pipelines using n8n inside Docker containers to eliminate repetitive manual operations.',
-      badge: 'Automation',
+        'Hands-on software projects spanning web utilities, security tooling, community issue tracking, and n8n workflow automation.',
+      badge: 'Practical Building',
     },
   ] as CertificationOrAchievement[],
 };

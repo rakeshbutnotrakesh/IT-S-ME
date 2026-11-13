@@ -8,14 +8,14 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="py-8 bg-[var(--bg-canvas)] text-xs font-mono text-[var(--text-muted)]">
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-3 gap-y-1">
-          <span>
-            &copy; {new Date().getFullYear()} {portfolioConfig.profile.name}.
+    <footer className="py-10 bg-[var(--bg-canvas)] text-xs text-[var(--text-muted)]">
+      <div className="max-w-[1120px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex flex-col sm:flex-row items-center gap-1.5 sm:gap-3 text-center sm:text-left">
+          <span className="font-medium text-[var(--text-primary)]">
+            RKM<span className="text-[var(--accent)]">.</span> &copy; 2026 {portfolioConfig.profile.name}.
           </span>
-          <span aria-hidden="true">&middot;</span>
-          <span>Last updated: {portfolioConfig.meta.lastUpdated}</span>
+          <span aria-hidden="true" className="hidden sm:inline">&middot;</span>
+          <span>Designed with curiosity. Built with code.</span>
         </div>
 
         <div className="flex items-center gap-4">
@@ -46,7 +46,7 @@ export const Footer: React.FC = () => {
             className="min-h-[44px] px-2 inline-flex items-center gap-1.5 hover:text-[var(--text-primary)] transition-colors cursor-pointer"
           >
             <span>Back to top</span>
-            <ArrowUp className="w-3.5 h-3.5 text-[var(--accent-text)]" />
+            <ArrowUp className="w-3.5 h-3.5 text-[var(--accent)]" />
           </button>
         </div>
       </div>

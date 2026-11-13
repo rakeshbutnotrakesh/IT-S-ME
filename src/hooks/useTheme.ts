@@ -1,19 +1,19 @@
 import { useState, useEffect } from 'react';
 
 export function useTheme() {
-  // Match server-side initial render ('dark') to avoid hydration mismatches, then sync in useEffect
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  // Match initial SSR light canvas (#F8F8F5) to prevent hydration mismatches
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
     try {
       const saved = localStorage.getItem('rkm_theme');
-      if (saved === 'light' || saved === 'dark') {
+      if (saved === 'dark' || saved === 'light') {
         setTheme(saved);
       } else {
-        setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        setTheme('light');
       }
     } catch {
-      setTheme('dark');
+      setTheme('light');
     }
   }, []);
 

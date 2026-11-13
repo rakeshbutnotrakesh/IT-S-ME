@@ -12,6 +12,7 @@ export interface PersonalInfo {
     degree: string;
     college: string;
     expectedGraduation: string;
+    academicAchievement: string;
     focus: string;
   };
   roles: string[];
@@ -31,13 +32,14 @@ export const personalInfo: PersonalInfo = {
   firstName: portfolioConfig.profile.firstName,
   displayInitials: portfolioConfig.profile.initials,
   title: portfolioConfig.profile.title,
-  tagline: portfolioConfig.profile.heroHeadline,
-  shortIntro: portfolioConfig.profile.heroSubheadline,
+  tagline: `${portfolioConfig.profile.heroHeadlinePrefix} ${portfolioConfig.profile.heroHeadlineAccent}${portfolioConfig.profile.heroHeadlineSuffix}`,
+  shortIntro: portfolioConfig.profile.heroDescription,
   aboutText: portfolioConfig.profile.aboutParagraphs,
   academic: {
     degree: portfolioConfig.education.degree,
     college: portfolioConfig.education.college,
     expectedGraduation: portfolioConfig.education.expectedGraduation,
+    academicAchievement: portfolioConfig.education.academicAchievement,
     focus: portfolioConfig.education.focus,
   },
   roles: portfolioConfig.profile.rotatingRoles,

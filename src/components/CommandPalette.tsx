@@ -41,15 +41,13 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
       p.techStack.some((t) => t.toLowerCase().includes(query.toLowerCase()))
   );
 
-  const completedCount = projectsData.filter((p) => p.status === 'Completed').length;
-
   const sections = [
-    { name: 'Home', href: '#home', desc: 'Hero introduction & developer overview' },
-    { name: 'About', href: '#about', desc: 'Engineering narrative & BCA program' },
-    { name: 'Skills', href: '#skills', desc: 'Languages, Frameworks & Automation Tools' },
-    { name: 'Projects', href: '#projects', desc: `Explore ${completedCount} live apps & GitHub feed` },
-    { name: 'Certifications & Timeline', href: '#timeline', desc: 'Achievements & technical progression' },
-    { name: 'Contact', href: '#contact', desc: 'Copy email, social links & automated contact form' },
+    { name: 'Home', href: '#home', desc: 'Introduction & overview' },
+    { name: 'About', href: '#about', desc: 'Background & BCA details' },
+    { name: 'Selected Work', href: '#projects', desc: 'Projects & experiments' },
+    { name: 'Technologies', href: '#skills', desc: 'Programming, web & tools' },
+    { name: 'Learning Journey', href: '#timeline', desc: 'Learning milestones' },
+    { name: 'Contact', href: '#contact', desc: 'Links & contact form' },
   ].filter(
     (s) =>
       s.name.toLowerCase().includes(query.toLowerCase()) ||
@@ -63,16 +61,16 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-20 px-3 sm:px-4 bg-black/65 backdrop-blur-md"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-20 px-3 sm:px-4 bg-black/55 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
       aria-label="Command Palette"
     >
       <div className="absolute inset-0" onClick={onClose} />
 
-      <div className="relative w-full max-w-xl bg-[var(--bg-canvas)] border border-[var(--border-strong)] rounded-2xl shadow-2xl overflow-hidden z-10">
-        <div className="flex items-center px-4 py-3 border-b border-[var(--border-hairline)] gap-3">
-          <Search className="w-4 h-4 text-[var(--accent-text)] shrink-0" />
+      <div className="relative w-full max-w-xl bg-[var(--bg-canvas)] border border-[var(--border)] rounded-xl shadow-2xl overflow-hidden z-10">
+        <div className="flex items-center px-4 py-3 border-b border-[var(--border)] gap-3">
+          <Search className="w-4 h-4 text-[var(--accent)] shrink-0" />
           <input
             type="text"
             value={query}
@@ -80,9 +78,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             placeholder="Search projects, sections, or actions..."
             autoFocus
             aria-label="Search portfolio commands"
-            className="min-h-[44px] flex-1 bg-transparent text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none font-sans"
+            className="min-h-[44px] flex-1 bg-transparent text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none"
           />
-          <kbd className="hidden sm:inline-block px-2 py-0.5 text-[10px] font-mono bg-[var(--bg-surface)] text-[var(--text-muted)] rounded border border-[var(--border-hairline)]">
+          <kbd className="hidden sm:inline-block px-2 py-0.5 text-[10px] font-mono bg-[var(--bg-surface)] text-[var(--text-muted)] rounded border border-[var(--border)]">
             ESC
           </kbd>
           <button
@@ -95,7 +93,7 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
           </button>
         </div>
 
-        <div className="max-h-[380px] overflow-y-auto p-3 space-y-4 text-xs font-sans">
+        <div className="max-h-[380px] overflow-y-auto p-3 space-y-4 text-xs">
           <div className="space-y-1">
             <div className="px-2 py-1 text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)] font-semibold">
               Quick Actions
@@ -104,14 +102,14 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
             <button
               type="button"
               onClick={() => handleSelect(onOpenRex)}
-              className="w-full min-h-[44px] px-3 py-2.5 rounded-xl hover:bg-[var(--bg-surface)] border border-transparent hover:border-[var(--border-hairline)] flex items-center justify-between text-left transition-colors text-[var(--text-primary)] group cursor-pointer"
+              className="w-full min-h-[44px] px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface)] border border-transparent hover:border-[var(--border)] flex items-center justify-between text-left transition-colors text-[var(--text-primary)] group cursor-pointer"
             >
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-[var(--accent-tint)] text-[var(--accent-text)] flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-[var(--accent-tint)] text-[var(--accent)] flex items-center justify-center shrink-0">
                   <Bot className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="font-semibold group-hover:text-[var(--accent-text)]">
+                  <div className="font-semibold group-hover:text-[var(--accent)]">
                     Ask Rex Portfolio Assistant
                   </div>
                   <div className="text-[11px] text-[var(--text-muted)]">
@@ -119,34 +117,34 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   </div>
                 </div>
               </div>
-              <ArrowRight className="w-3.5 h-3.5 text-[var(--text-muted)] group-hover:text-[var(--accent-text)]" />
+              <ArrowRight className="w-3.5 h-3.5 text-[var(--text-muted)] group-hover:text-[var(--accent)]" />
             </button>
 
             <button
               type="button"
               onClick={() => handleSelect(onOpenResume)}
-              className="w-full min-h-[44px] px-3 py-2.5 rounded-xl hover:bg-[var(--bg-surface)] border border-transparent hover:border-[var(--border-hairline)] flex items-center justify-between text-left transition-colors text-[var(--text-primary)] group cursor-pointer"
+              className="w-full min-h-[44px] px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface)] border border-transparent hover:border-[var(--border)] flex items-center justify-between text-left transition-colors text-[var(--text-primary)] group cursor-pointer"
             >
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-lg bg-[var(--accent-tint)] text-[var(--accent-text)] flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-lg bg-[var(--accent-tint)] text-[var(--accent)] flex items-center justify-center shrink-0">
                   <FileText className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="font-semibold group-hover:text-[var(--accent-text)]">
-                    View / Download Resume
+                  <div className="font-semibold group-hover:text-[var(--accent)]">
+                    View Resume Overview
                   </div>
                   <div className="text-[11px] text-[var(--text-muted)]">
-                    BCA coursework, skills &amp; shipped projects
+                    Education, technologies, and projects
                   </div>
                 </div>
               </div>
-              <ArrowRight className="w-3.5 h-3.5 text-[var(--text-muted)] group-hover:text-[var(--accent-text)]" />
+              <ArrowRight className="w-3.5 h-3.5 text-[var(--text-muted)] group-hover:text-[var(--accent)]" />
             </button>
 
             <button
               type="button"
               onClick={() => handleSelect(onToggleTheme)}
-              className="w-full min-h-[44px] px-3 py-2.5 rounded-xl hover:bg-[var(--bg-surface)] border border-transparent hover:border-[var(--border-hairline)] flex items-center justify-between text-left transition-colors text-[var(--text-primary)] group cursor-pointer"
+              className="w-full min-h-[44px] px-3 py-2.5 rounded-lg hover:bg-[var(--bg-surface)] border border-transparent hover:border-[var(--border)] flex items-center justify-between text-left transition-colors text-[var(--text-primary)] group cursor-pointer"
             >
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-lg bg-[var(--bg-subtle)] text-[var(--text-secondary)] flex items-center justify-center shrink-0">
@@ -175,14 +173,14 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   target={project.liveUrl ? '_blank' : undefined}
                   rel={project.liveUrl ? 'noopener noreferrer' : undefined}
                   onClick={onClose}
-                  className="w-full min-h-[44px] px-3 py-2 rounded-xl hover:bg-[var(--bg-surface)] flex items-center justify-between text-left transition-colors text-[var(--text-primary)] group"
+                  className="w-full min-h-[44px] px-3 py-2 rounded-lg hover:bg-[var(--bg-surface)] flex items-center justify-between text-left transition-colors text-[var(--text-primary)] group"
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
-                    <div className="w-8 h-8 rounded-lg bg-[var(--accent-tint)] text-[var(--accent-text)] flex items-center justify-center font-mono text-xs font-bold shrink-0">
-                      {project.name.charAt(0)}
+                    <div className="w-8 h-8 rounded-lg bg-[var(--accent-tint)] text-[var(--accent)] flex items-center justify-center font-mono text-xs font-bold shrink-0">
+                      {project.indexNumber}
                     </div>
                     <div className="min-w-0">
-                      <div className="font-semibold group-hover:text-[var(--accent-text)] flex items-center gap-2 flex-wrap">
+                      <div className="font-semibold group-hover:text-[var(--accent)] flex items-center gap-2 flex-wrap">
                         <span>{project.name}</span>
                         <span className="text-[10px] font-mono text-[var(--text-muted)]">
                           &middot; {project.status}
@@ -194,9 +192,9 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                     </div>
                   </div>
                   {project.liveUrl ? (
-                    <ExternalLink className="w-3.5 h-3.5 text-[var(--text-muted)] group-hover:text-[var(--accent-text)] shrink-0 ml-2" />
+                    <ExternalLink className="w-3.5 h-3.5 text-[var(--text-muted)] group-hover:text-[var(--accent)] shrink-0 ml-2" />
                   ) : (
-                    <ArrowRight className="w-3.5 h-3.5 text-[var(--text-muted)] group-hover:text-[var(--accent-text)] shrink-0 ml-2" />
+                    <ArrowRight className="w-3.5 h-3.5 text-[var(--text-muted)] group-hover:text-[var(--accent)] shrink-0 ml-2" />
                   )}
                 </a>
               ))}
@@ -213,24 +211,24 @@ export const CommandPalette: React.FC<CommandPaletteProps> = ({
                   key={sec.name}
                   href={sec.href}
                   onClick={onClose}
-                  className="w-full min-h-[44px] px-3 py-2 rounded-xl hover:bg-[var(--bg-surface)] flex items-center justify-between text-left transition-colors text-[var(--text-primary)] group"
+                  className="w-full min-h-[44px] px-3 py-2 rounded-lg hover:bg-[var(--bg-surface)] flex items-center justify-between text-left transition-colors text-[var(--text-primary)] group"
                 >
                   <div>
-                    <div className="font-semibold group-hover:text-[var(--accent-text)]">
+                    <div className="font-semibold group-hover:text-[var(--accent)]">
                       {sec.name}
                     </div>
                     <div className="text-[11px] text-[var(--text-muted)]">
                       {sec.desc}
                     </div>
                   </div>
-                  <ArrowRight className="w-3.5 h-3.5 text-[var(--text-muted)] group-hover:text-[var(--accent-text)] shrink-0" />
+                  <ArrowRight className="w-3.5 h-3.5 text-[var(--text-muted)] group-hover:text-[var(--accent)] shrink-0" />
                 </a>
               ))}
             </div>
           )}
         </div>
 
-        <div className="px-4 py-2.5 bg-[var(--bg-surface)] border-t border-[var(--border-hairline)] flex items-center justify-between text-[11px] font-mono text-[var(--text-muted)]">
+        <div className="px-4 py-2.5 bg-[var(--bg-surface)] border-t border-[var(--border)] flex items-center justify-between text-[11px] font-mono text-[var(--text-muted)]">
           <span>Press ESC to dismiss</span>
           <span>Shortcut: ⌘K / Ctrl+K</span>
         </div>

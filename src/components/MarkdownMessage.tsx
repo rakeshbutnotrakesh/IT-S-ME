@@ -34,7 +34,7 @@ export const MarkdownMessage: React.FC<MarkdownMessageProps> = ({ content }) => 
     parts.push(
       <div key={`code-${currentIndex}`} className="my-2.5 rounded-xl overflow-hidden bg-zinc-950 border border-zinc-800 font-mono text-xs shadow-md">
         <div className="flex items-center justify-between px-3 py-1.5 bg-zinc-900 border-b border-zinc-800 text-[11px] text-zinc-400">
-          <span className="uppercase tracking-wider font-semibold text-amber-400">{language}</span>
+          <span className="uppercase tracking-wider font-semibold text-[#7C9AFF]">{language}</span>
           <button
             onClick={() => handleCopy(code, currentIndex)}
             className="flex items-center gap-1 hover:text-white transition-colors cursor-pointer"

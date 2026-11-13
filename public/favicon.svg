@@ -1,11 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
-  <defs>
-    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ff4d2e" />
-      <stop offset="100%" stop-color="#f59e0b" />
-    </linearGradient>
-  </defs>
-  <rect width="100" height="100" rx="20" fill="#0b0b0c" />
-  <rect x="6" y="6" width="88" height="88" rx="16" fill="none" stroke="rgba(245,245,243,0.16)" stroke-width="2" />
-  <text x="50" y="61" text-anchor="middle" fill="url(#g)" font-family="system-ui, -apple-system, sans-serif" font-size="34" font-weight="800" letter-spacing="-1">RKM</text>
+  <rect width="100" height="100" rx="18" fill="#171717" />
+  <rect x="4" y="4" width="92" height="92" rx="14" fill="none" stroke="#262A2E" stroke-width="2" />
+  <text x="50" y="61" text-anchor="middle" fill="#F8F8F5" font-family="system-ui, -apple-system, sans-serif" font-size="30" font-weight="800" letter-spacing="-1">RKM<tspan fill="#315EF5">.</tspan></text>
 </svg>
