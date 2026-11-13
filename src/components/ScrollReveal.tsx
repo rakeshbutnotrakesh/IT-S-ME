@@ -7,68 +7,65 @@ interface ScrollRevealProps {
   className?: string;
 }
 
+// SSR-safe IntersectionObserver fade/slide-up reveal with stagger support and reduced-motion opt-out
 export const ScrollReveal: React.FC<ScrollRevealProps> = ({
   children,
   delay = 0,
   direction = 'up',
   className = '',
 }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const elementRef = useRef<HTMLDivElement | null>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [state, setState] = useState<'visible' | 'hidden'>('visible');
 
   useEffect(() => {
-    // Respect reduced motion
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      setIsVisible(true);
+    const el = ref.current;
+    if (!el) return;
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced || typeof IntersectionObserver === 'undefined') {
+      setState('visible');
       return;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries;
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '0px 0px -40px 0px',
-      }
-    );
-
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
+    const rect = el.getBoundingClientRect();
+    // Only hide elements that start well below the initial viewport so SSR & above-the-fold never flash
+    if (rect.top > window.innerHeight * 0.92) {
+      setState('hidden');
     }
 
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setState('visible');
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -32px 0px' }
+    );
+
+    observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
-  const getTransform = () => {
-    if (isVisible) return 'translate3d(0, 0, 0)';
-    switch (direction) {
-      case 'up':
-        return 'translate3d(0, 28px, 0)';
-      case 'down':
-        return 'translate3d(0, -28px, 0)';
-      case 'left':
-        return 'translate3d(28px, 0, 0)';
-      case 'right':
-        return 'translate3d(-28px, 0, 0)';
-      default:
-        return 'none';
-    }
-  };
+  const hiddenTransform =
+    direction === 'up'
+      ? 'translateY(16px)'
+      : direction === 'down'
+      ? 'translateY(-16px)'
+      : direction === 'left'
+      ? 'translateX(16px)'
+      : direction === 'right'
+      ? 'translateX(-16px)'
+      : 'none';
 
   return (
     <div
-      ref={elementRef}
-      className={`transition-all duration-700 ease-out ${className}`}
+      ref={ref}
+      className={className}
       style={{
-        opacity: isVisible ? 1 : 0,
-        transform: getTransform(),
-        transitionDelay: `${delay}ms`,
+        opacity: state === 'visible' ? 1 : 0,
+        transform: state === 'visible' ? 'translate3d(0,0,0)' : hiddenTransform,
+        transition: `opacity 420ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms, transform 420ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
       }}
     >
       {children}

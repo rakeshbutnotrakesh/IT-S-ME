@@ -1,25 +1,47 @@
 import React, { useState, useEffect } from 'react';
 
 export const ScrollProgressBar: React.FC = () => {
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
+    let rafId = 0;
+
+    const updateProgress = () => {
       const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalHeight <= 0) return;
-      const progress = (window.scrollY / totalHeight) * 100;
-      setScrollProgress(Math.min(100, Math.max(0, progress)));
+      if (totalHeight <= 0) {
+        setProgress(0);
+        return;
+      }
+      const next = Math.min(1, Math.max(0, window.scrollY / totalHeight));
+      setProgress(next);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(updateProgress);
+    };
+
+    updateProgress();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 right-0 h-[2.5px] z-50 pointer-events-none bg-transparent">
+    <div
+      aria-hidden="true"
+      className="fixed top-0 left-0 right-0 h-[2px] z-50 pointer-events-none bg-transparent"
+    >
       <div
-        className="h-full bg-gradient-to-r from-blue-600 via-indigo-500 to-cyan-400 shadow-sm shadow-blue-500/50 transition-all duration-150 ease-out"
-        style={{ width: `${scrollProgress}%` }}
+        className="h-full w-full origin-left transition-transform duration-150 ease-out"
+        style={{
+          backgroundColor: 'var(--accent)',
+          transform: `scaleX(${progress})`,
+        }}
       />
     </div>
   );

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#09090b" />
+      <stop offset="55%" stop-color="#0b1220" />
+      <stop offset="100%" stop-color="#090d16" />
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1" />
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bgGrad)" />
+  <rect width="1200" height="630" fill="url(#grid)" />
+  <rect x="48" y="48" width="1104" height="534" rx="28" fill="rgba(24,24,27,0.65)" stroke="rgba(56,189,248,0.25)" stroke-width="2" />
+
+  <!-- Top Monogram Badge -->
+  <rect x="96" y="102" width="76" height="76" rx="18" fill="url(#accentGrad)" />
+  <text x="134" y="150" text-anchor="middle" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="800">RKM</text>
+
+  <!-- Supporting Credential -->
+  <text x="192" y="135" fill="#38bdf8" font-family="ui-monospace, SFMono-Regular, monospace" font-size="20" font-weight="600">SOFTWARE DEVELOPER PORTFOLIO</text>
+  <text x="192" y="166" fill="#a1a1aa" font-family="ui-monospace, SFMono-Regular, monospace" font-size="18">BCA (9.65 SGPA) · India</text>
+
+  <!-- Name & Value Proposition -->
+  <text x="96" y="275" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="64" font-weight="800">Rakesh Kumar Mondal</text>
+  <text x="96" y="340" fill="#e4e4e7" font-family="system-ui, -apple-system, sans-serif" font-size="30" font-weight="500">Building Web Applications &amp; Workflow Automation Tools</text>
+
+  <!-- Tech Stack Line -->
+  <line x1="96" y1="400" x2="1104" y2="400" stroke="rgba(255,255,255,0.12)" stroke-width="1.5" />
+  <text x="96" y="458" fill="#38bdf8" font-family="ui-monospace, SFMono-Regular, monospace" font-size="22" font-weight="600">Python · React · TypeScript · C++ · Docker · n8n</text>
+
+  <!-- Footer Domain -->
+  <text x="96" y="528" fill="#a1a1aa" font-family="ui-monospace, SFMono-Regular, monospace" font-size="18">portfolio-two-puce-hj49ocwerj.vercel.app</text>
+  <text x="1104" y="528" text-anchor="end" fill="#a1a1aa" font-family="ui-monospace, SFMono-Regular, monospace" font-size="18">github.com/rakeshbutnotrakesh</text>
+</svg>

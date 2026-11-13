@@ -1,15 +1,21 @@
 import { useState, useEffect } from 'react';
 
 export function useTheme() {
-  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+  // Match server-side initial render ('dark') to avoid hydration mismatches, then sync in useEffect
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+
+  useEffect(() => {
     try {
       const saved = localStorage.getItem('rkm_theme');
-      if (saved === 'light' || saved === 'dark') return saved;
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      if (saved === 'light' || saved === 'dark') {
+        setTheme(saved);
+      } else {
+        setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      }
     } catch {
-      return 'dark';
+      setTheme('dark');
     }
-  });
+  }, []);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -21,7 +27,7 @@ export function useTheme() {
     try {
       localStorage.setItem('rkm_theme', theme);
     } catch {
-      // Ignore
+      // Ignore storage restrictions
     }
   }, [theme]);
 

@@ -3,52 +3,107 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rakesh Kumar Mondal — Portfolio | BCA Student &amp; Software Developer</title>
-    <meta name="description" content="Personal portfolio of Rakesh Kumar Mondal — BCA student, aspiring software developer, and automation enthusiast building practical digital solutions." />
-    
+    <title>Rakesh Kumar Mondal | Software Developer Portfolio</title>
+    <meta
+      name="description"
+      content="Software developer building web apps and workflow automation tools with Python, React, TypeScript, Docker, and n8n. BCA student (9.65 SGPA). View live apps."
+    />
+    <link rel="canonical" href="https://portfolio-two-puce-hj49ocwerj.vercel.app/" />
+    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+
     <!-- OpenGraph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Rakesh Kumar Mondal — Portfolio | BCA Student &amp; Software Developer" />
-    <meta property="og:description" content="Explore projects, technical skills, academic achievements, and learning journey of Rakesh Kumar Mondal." />
+    <meta property="og:title" content="Rakesh Kumar Mondal | Software Developer Portfolio" />
+    <meta
+      property="og:description"
+      content="Software developer building web apps and workflow automation tools with Python, React, TypeScript, Docker, and n8n. BCA student (9.65 SGPA). View live apps."
+    />
     <meta property="og:site_name" content="Rakesh Kumar Mondal Portfolio" />
     <meta property="og:url" content="https://portfolio-two-puce-hj49ocwerj.vercel.app/" />
-    
+    <meta property="og:image" content="https://portfolio-two-puce-hj49ocwerj.vercel.app/og-image.svg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Rakesh Kumar Mondal — Software Developer building web apps and automation tools" />
+
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Rakesh Kumar Mondal — Portfolio | BCA Student &amp; Software Developer" />
-    <meta name="twitter:description" content="Explore projects, technical skills, academic achievements, and learning journey of Rakesh Kumar Mondal." />
-    
-    <!-- Google Fonts: Space Grotesk, Inter, JetBrains Mono, Anton -->
+    <meta name="twitter:title" content="Rakesh Kumar Mondal | Software Developer Portfolio" />
+    <meta
+      name="twitter:description"
+      content="Software developer building web apps and workflow automation tools with Python, React, TypeScript, Docker, and n8n. BCA student (9.65 SGPA). View live apps."
+    />
+    <meta name="twitter:image" content="https://portfolio-two-puce-hj49ocwerj.vercel.app/og-image.svg" />
+
+    <!-- Preconnect & Non-Blocking Font Stylesheet with font-display=swap -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
-    <!-- Favicon SVG RKM Monogram -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'><stop offset='0%25' stop-color='%2338bdf8'/><stop offset='50%25' stop-color='%2306b6d4'/><stop offset='100%25' stop-color='%233b82f6'/></linearGradient></defs><circle cx='50' cy='50' r='48' fill='%23070b16' stroke='%2306b6d4' stroke-width='3'/><path d='M28 24 L38 24 L38 76 L28 76 Z M38 24 L54 24 C63 24 70 30 70 40 C70 48 64 54 55 54 L38 54 Z M48 34 L48 44 L54 44 C57 44 60 42 60 39 C60 36 57 34 54 34 Z M48 51 L61 76 L72 76 L59 51 Z M60 54 L67 43 L72 43 L78 54 L78 76 L70 76 L70 56 Z' fill='url(%23g)'/><circle cx='70' cy='40' r='4' fill='%2338bdf8'/></svg>" />
+    <!-- Favicon & Apple Touch Icon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
 
-    <!-- Schema.org JSON-LD -->
+    <!-- Sync saved theme before paint without blocking render -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('rkm_theme');
+          var isDark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.classList.toggle('dark', isDark);
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- Schema.org Person Structured Data -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Rakesh Kumar Mondal",
-      "jobTitle": "BCA Student | Aspiring Software Developer | Web Developer | Automation Enthusiast",
-      "url": "https://portfolio-two-puce-hj49ocwerj.vercel.app/",
-      "sameAs": [
-        "https://github.com/rakeshbutnotrakesh"
-      ],
-      "knowsAbout": [
-        "Programming",
-        "Software Development",
-        "Web Development",
-        "Python",
-        "Cybersecurity",
-        "Workflow Automation",
-        "Artificial Intelligence",
-        "React",
-        "TypeScript"
-      ]
-    }
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Rakesh Kumar Mondal",
+        "jobTitle": "Software Developer",
+        "description": "Software developer building web applications and workflow automation tools with Python, React, TypeScript, Docker, and n8n.",
+        "url": "https://portfolio-two-puce-hj49ocwerj.vercel.app/",
+        "email": "mailto:rakeshkumarmondal51@gmail.com",
+        "sameAs": [
+          "https://github.com/rakeshbutnotrakesh",
+          "[YOUR_LINKEDIN_URL]"
+        ],
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "[YOUR_COLLEGE_NAME] — Bachelor of Computer Applications (BCA)"
+        },
+        "knowsAbout": [
+          "Python",
+          "React",
+          "TypeScript",
+          "JavaScript",
+          "C",
+          "C++",
+          "Java",
+          "Docker",
+          "n8n",
+          "Web Development",
+          "Workflow Automation",
+          "Cybersecurity"
+        ]
+      }
     </script>
   </head>
   <body class="bg-white text-zinc-900 dark:bg-[#09090b] dark:text-[#f4f4f5] antialiased selection:bg-blue-600 selection:text-white min-h-screen transition-colors duration-200">
@@ -56,4 +111,3 @@
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

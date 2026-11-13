@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useId } from 'react';
 
 interface RexRobotProps {
   size?: 'sm' | 'md' | 'lg' | 'xl';
@@ -17,6 +17,7 @@ export const RexRobot: React.FC<RexRobotProps> = ({
   onClick,
   expression = 'normal',
 }) => {
+  const uid = useId().replace(/:/g, '');
   const [isBlinking, setIsBlinking] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -143,32 +144,32 @@ export const RexRobot: React.FC<RexRobotProps> = ({
         >
           <defs>
             {/* Head Gradients - Remains Deep Tech Obsidian */}
-            <linearGradient id="rexHeadGrad" x1="50" y1="50" x2="150" y2="130" gradientUnits="userSpaceOnUse">
+            <linearGradient id={`${uid}-head`} x1="50" y1="50" x2="150" y2="130" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stopColor="#082f49" />
               <stop offset="50%" stopColor="#030712" />
               <stop offset="100%" stopColor="#020617" />
             </linearGradient>
 
             {/* Glowing Border - Pure Electric Cyan / Azure Blue */}
-            <linearGradient id="rexCyanBorder" x1="40" y1="40" x2="160" y2="140" gradientUnits="userSpaceOnUse">
+            <linearGradient id={`${uid}-border`} x1="40" y1="40" x2="160" y2="140" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stopColor={isLove ? '#bae6fd' : '#38bdf8'} />
               <stop offset="50%" stopColor={isLove ? '#38bdf8' : '#06b6d4'} />
               <stop offset="100%" stopColor={isLove ? '#0284c7' : '#0369a1'} />
             </linearGradient>
 
             {/* Ears / Headphone Accents */}
-            <linearGradient id="rexEarGrad" x1="0" y1="0" x2="0" y2="1">
+            <linearGradient id={`${uid}-ear`} x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor={isLove ? '#38bdf8' : '#0284c7'} />
               <stop offset="100%" stopColor="#082f49" />
             </linearGradient>
 
-            <linearGradient id="rexBodyGrad" x1="70" y1="135" x2="130" y2="210" gradientUnits="userSpaceOnUse">
+            <linearGradient id={`${uid}-body`} x1="70" y1="135" x2="130" y2="210" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stopColor="#082f49" />
               <stop offset="100%" stopColor="#030712" />
             </linearGradient>
 
             {/* Reactor Core Glow - Ultra Radiant White-to-Cyan Core */}
-            <radialGradient id="rexCoreGlow" cx="50%" cy="50%" r="50%">
+            <radialGradient id={`${uid}-core`} cx="50%" cy="50%" r="50%">
               <stop offset="0%" stopColor="#ffffff" />
               <stop offset="35%" stopColor="#67e8f9" />
               <stop offset="70%" stopColor="#06b6d4" />
@@ -176,37 +177,37 @@ export const RexRobot: React.FC<RexRobotProps> = ({
             </radialGradient>
 
             {/* Heart Eyes Gradient - Electric Cyan to Sky Blue (No Pink!) */}
-            <linearGradient id="rexCyanHeartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient id={`${uid}-heart`} x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="#e0f2fe" />
               <stop offset="40%" stopColor="#38bdf8" />
               <stop offset="100%" stopColor="#0284c7" />
             </linearGradient>
 
-            <radialGradient id="rexBaseShadow" cx="50%" cy="50%" r="50%">
+            <radialGradient id={`${uid}-base`} cx="50%" cy="50%" r="50%">
               <stop offset="0%" stopColor={isLove ? '#22d3ee' : '#06b6d4'} stopOpacity={isLove ? '0.95' : '0.8'} />
               <stop offset="60%" stopColor="#0284c7" stopOpacity="0.4" />
               <stop offset="100%" stopColor="transparent" stopOpacity="0" />
             </radialGradient>
 
             {/* Neon Glow Filters */}
-            <filter id="neonGlow" x="-30%" y="-30%" width="160%" height="160%">
+            <filter id={`${uid}-neon`} x="-30%" y="-30%" width="160%" height="160%">
               <feGaussianBlur stdDeviation={isLove ? '4.5' : '3.5'} result="blur" />
               <feComposite in="SourceGraphic" in2="blur" operator="over" />
             </filter>
 
-            <filter id="eyeGlow" x="-30%" y="-30%" width="160%" height="160%">
+            <filter id={`${uid}-eye`} x="-30%" y="-30%" width="160%" height="160%">
               <feGaussianBlur stdDeviation={isLove ? '3.5' : '2'} result="blur" />
               <feComposite in="SourceGraphic" in2="blur" operator="over" />
             </filter>
 
-            <filter id="superCyanGlow" x="-40%" y="-40%" width="180%" height="180%">
+            <filter id={`${uid}-super`} x="-40%" y="-40%" width="180%" height="180%">
               <feGaussianBlur stdDeviation="4" result="blur" />
               <feComposite in="SourceGraphic" in2="blur" operator="over" />
             </filter>
           </defs>
 
           {/* Floating Base Glow / Thruster pool beneath robot */}
-          <ellipse cx="100" cy="225" rx={isLove ? 44 : 38} ry={isLove ? 9 : 7} fill="url(#rexBaseShadow)" />
+          <ellipse cx="100" cy="225" rx={isLove ? 44 : 38} ry={isLove ? 9 : 7} fill={`url(#${uid}-base)`} />
           <ellipse cx="100" cy="225" rx={isLove ? 26 : 20} ry={isLove ? 4.5 : 3.5} fill="#38bdf8" opacity="0.8" />
 
           {/* --- ANTENNA --- */}
@@ -219,7 +220,7 @@ export const RexRobot: React.FC<RexRobotProps> = ({
             cy="20"
             r={isLove ? 12 : 10}
             fill="#06b6d4"
-            filter="url(#neonGlow)"
+            filter={`url(#${uid}-neon)`}
             className={isLove ? 'animate-pulse' : ''}
           />
           <circle cx="100" cy="20" r={isLove ? 7 : 6} fill="#a5f3fc" />
@@ -233,7 +234,7 @@ export const RexRobot: React.FC<RexRobotProps> = ({
             width="16"
             height="34"
             rx="8"
-            fill="url(#rexEarGrad)"
+            fill={`url(#${uid}-ear)`}
             stroke={isLove ? '#38bdf8' : '#06b6d4'}
             strokeWidth="2.5"
           />
@@ -246,7 +247,7 @@ export const RexRobot: React.FC<RexRobotProps> = ({
             width="16"
             height="34"
             rx="8"
-            fill="url(#rexEarGrad)"
+            fill={`url(#${uid}-ear)`}
             stroke={isLove ? '#38bdf8' : '#06b6d4'}
             strokeWidth="2.5"
           />
@@ -260,8 +261,8 @@ export const RexRobot: React.FC<RexRobotProps> = ({
             width="116"
             height="86"
             rx="32"
-            fill="url(#rexHeadGrad)"
-            stroke="url(#rexCyanBorder)"
+            fill={`url(#${uid}-head)`}
+            stroke={`url(#${uid}-border)`}
             strokeWidth={isLove ? 4 : 3.5}
           />
 
@@ -289,11 +290,11 @@ export const RexRobot: React.FC<RexRobotProps> = ({
           {/* --- EYES & EXPRESSION --- */}
           {isLove ? (
             // Adorable Glowing Electric Cyan Heart Eyes (♥ ♥) with pure white highlights (No Pink!)
-            <g filter="url(#superCyanGlow)">
+            <g filter={`url(#${uid}-super)`}>
               {/* Left Heart Eye */}
               <path
                 d="M 78 95 C 75 92 68 85 68 80 C 68 75.5 71.5 72 75.5 72 C 77.8 72 78 74 78 74 C 78 74 78.2 72 80.5 72 C 84.5 72 88 75.5 88 80 C 88 85 81 92 78 95 Z"
-                fill="url(#rexCyanHeartGrad)"
+                fill={`url(#${uid}-heart)`}
                 stroke="#ffffff"
                 strokeWidth="1.4"
                 className="animate-pulse"
@@ -303,7 +304,7 @@ export const RexRobot: React.FC<RexRobotProps> = ({
               {/* Right Heart Eye */}
               <path
                 d="M 122 95 C 119 92 112 85 112 80 C 112 75.5 115.5 72 119.5 72 C 121.8 72 122 74 122 74 C 122 74 122.2 72 124.5 72 C 128.5 72 132 75.5 132 80 C 132 85 125 92 122 95 Z"
-                fill="url(#rexCyanHeartGrad)"
+                fill={`url(#${uid}-heart)`}
                 stroke="#ffffff"
                 strokeWidth="1.4"
                 className="animate-pulse"
@@ -328,13 +329,13 @@ export const RexRobot: React.FC<RexRobotProps> = ({
             </g>
           ) : isBlinking ? (
             // Blinking horizontal neon line
-            <g filter="url(#eyeGlow)">
+            <g filter={`url(#${uid}-eye)`}>
               <line x1="68" y1="86" x2="88" y2="86" stroke="#22d3ee" strokeWidth="4" strokeLinecap="round" />
               <line x1="112" y1="86" x2="132" y2="86" stroke="#22d3ee" strokeWidth="4" strokeLinecap="round" />
             </g>
           ) : (
-            // Cute smiling arc eyes (exact match to reference screenshot: ^ ^ / ◠ ◠)
-            <g filter="url(#eyeGlow)">
+            // Cute smiling arc eyes
+            <g filter={`url(#${uid}-eye)`}>
               {/* Left Eye */}
               <path
                 d="M 68 90 Q 78 76 88 90"
@@ -387,7 +388,7 @@ export const RexRobot: React.FC<RexRobotProps> = ({
           {/* Left Arm */}
           <path
             d="M 54 150 C 44 155 40 170 42 186 C 44 194 50 196 54 192 C 58 186 58 174 58 162 Z"
-            fill="url(#rexEarGrad)"
+            fill={`url(#${uid}-ear)`}
             stroke={isLove ? '#38bdf8' : '#06b6d4'}
             strokeWidth="2.5"
           />
@@ -395,7 +396,7 @@ export const RexRobot: React.FC<RexRobotProps> = ({
           {/* Right Arm */}
           <path
             d="M 146 150 C 156 155 160 170 158 186 C 156 194 150 196 146 192 C 142 186 142 174 142 162 Z"
-            fill="url(#rexEarGrad)"
+            fill={`url(#${uid}-ear)`}
             stroke={isLove ? '#38bdf8' : '#06b6d4'}
             strokeWidth="2.5"
           />
@@ -407,8 +408,8 @@ export const RexRobot: React.FC<RexRobotProps> = ({
             width="84"
             height="72"
             rx="24"
-            fill="url(#rexBodyGrad)"
-            stroke="url(#rexCyanBorder)"
+            fill={`url(#${uid}-body)`}
+            stroke={`url(#${uid}-border)`}
             strokeWidth="3"
           />
 
@@ -436,8 +437,8 @@ export const RexRobot: React.FC<RexRobotProps> = ({
             cx="100"
             cy="174"
             r={isLove ? 9 : 8}
-            fill="url(#rexCoreGlow)"
-            filter="url(#neonGlow)"
+            fill={`url(#${uid}-core)`}
+            filter={`url(#${uid}-neon)`}
             className={isLove ? 'animate-pulse' : ''}
           />
           <circle cx="98" cy="172" r="3.5" fill="#ffffff" />

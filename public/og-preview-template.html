@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1200, initial-scale=1.0" />
+    <title>OG Social Preview Template (1200x630)</title>
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: linear-gradient(135deg, #09090b 0%, #0b1220 55%, #090d16 100%);
+        color: #f4f4f5;
+        font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 48px;
+      }
+      .card {
+        width: 100%;
+        height: 100%;
+        border-radius: 28px;
+        border: 2px solid rgba(56, 189, 248, 0.25);
+        background: rgba(24, 24, 27, 0.72);
+        padding: 56px 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .top { display: flex; align-items: center; gap: 20px; }
+      .badge {
+        width: 72px; height: 72px; border-radius: 18px;
+        background: linear-gradient(135deg, #38bdf8, #2563eb);
+        display: flex; align-items: center; justify-content: center;
+        font-weight: 800; font-size: 24px; color: #fff;
+      }
+      .kicker { font-family: ui-monospace, monospace; color: #38bdf8; font-size: 20px; font-weight: 600; }
+      .sub { font-family: ui-monospace, monospace; color: #a1a1aa; font-size: 18px; margin-top: 4px; }
+      h1 { font-size: 64px; font-weight: 800; line-height: 1.08; letter-spacing: -0.02em; }
+      .role { font-size: 30px; color: #e4e4e7; margin-top: 14px; font-weight: 500; }
+      .stack {
+        border-top: 1px solid rgba(255,255,255,0.12);
+        padding-top: 28px;
+        display: flex; justify-content: space-between; align-items: center;
+        font-family: ui-monospace, monospace;
+      }
+      .tech { color: #38bdf8; font-size: 22px; font-weight: 600; }
+      .url { color: #a1a1aa; font-size: 18px; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="top">
+        <div class="badge">RKM</div>
+        <div>
+          <div class="kicker">SOFTWARE DEVELOPER PORTFOLIO</div>
+          <div class="sub">BCA (9.65 SGPA) · India</div>
+        </div>
+      </div>
+      <div>
+        <h1>Rakesh Kumar Mondal</h1>
+        <p class="role">Building Web Applications &amp; Workflow Automation Tools</p>
+      </div>
+      <div class="stack">
+        <span class="tech">Python · React · TypeScript · Docker · n8n</span>
+        <span class="url">portfolio-two-puce-hj49ocwerj.vercel.app</span>
+      </div>
+    </div>
+  </body>
+</html>

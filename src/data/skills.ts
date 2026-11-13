@@ -8,7 +8,7 @@ export interface SkillCategory {
 
 export const skillCategories: SkillCategory[] = [
   {
-    title: "Programming",
+    title: "Languages",
     description: "Core programming languages practiced through BCA coursework, logic building, and data structures.",
     skills: [
       { name: "C" },
@@ -18,7 +18,7 @@ export const skillCategories: SkillCategory[] = [
     ]
   },
   {
-    title: "Web Development",
+    title: "Frameworks & Web",
     description: "Frontend technologies used to build responsive, typed, and accessible web applications.",
     skills: [
       { name: "HTML" },

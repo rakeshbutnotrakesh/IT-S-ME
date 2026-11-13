@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { ExternalLink, Github, Info, Search, CheckCircle2, Clock, Calendar } from 'lucide-react';
+import { ExternalLink, Github, ArrowUpRight, Search, CheckCircle2, Clock } from 'lucide-react';
 import { projectsData, ProjectItem } from '../data/projects';
-import { MessageBlockTypewriter } from './MessageBlockTypewriter';
+import { ScrollReveal } from './ScrollReveal';
 
 interface ProjectsProps {
   onSelectProject: (project: ProjectItem) => void;
@@ -12,79 +12,93 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   const categories = useMemo(() => {
-    return ['All', ...Array.from(new Set(projectsData.map(p => p.category)))];
+    return ['All', ...Array.from(new Set(projectsData.map((p) => p.category)))];
+  }, []);
+
+  // Place CyberSafe first when showing "All" so a standout engineering build is featured larger
+  const orderedProjects = useMemo(() => {
+    const cybersafe = projectsData.find((p) => p.id === 'cybersafe');
+    const rest = projectsData.filter((p) => p.id !== 'cybersafe');
+    return cybersafe ? [cybersafe, ...rest] : projectsData;
   }, []);
 
   const filteredProjects = useMemo(() => {
-    return projectsData.filter((project) => {
+    return orderedProjects.filter((project) => {
       const matchesCategory =
         selectedCategory === 'All' || project.category === selectedCategory;
       const matchesSearch =
         project.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        project.techStack.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
+        project.techStack.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
       return matchesCategory && matchesSearch;
     });
-  }, [selectedCategory, searchQuery]);
+  }, [orderedProjects, selectedCategory, searchQuery]);
 
   return (
-    <section id="projects" className="py-20 md:py-28 border-t border-zinc-200 dark:border-white/10 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-        {/* Section Header with Message Block Typing Animation */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-zinc-200 dark:border-white/10">
-          <div className="space-y-3">
-            <div className="text-xs font-mono uppercase tracking-wider text-blue-600 dark:text-cyan-400 font-semibold">
-              Selected Works &amp; Builds
+    <section
+      id="projects"
+      className="py-20 sm:py-28 border-b border-[var(--border-hairline)] scroll-mt-20"
+    >
+      <div className="max-w-[1100px] mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div className="space-y-2 max-w-xl">
+            <div className="font-mono text-xs text-[var(--accent-text)] font-medium">
+              Selected Work
             </div>
-            <MessageBlockTypewriter
-              as="h2"
-              text="Projects & Automation Experiments"
-              badgeLabel="DEPLOYMENT // REPOSITORIES"
-              className="text-2xl sm:text-4xl lg:text-5xl font-heading font-bold text-zinc-900 dark:text-white tracking-tight text-balance"
-              speed={20}
-            />
+            <h2 className="heading-section font-bold text-[var(--text-primary)]">
+              Projects &amp; Automation Builds
+            </h2>
           </div>
-
-          <div className="text-sm text-zinc-600 dark:text-zinc-400 max-w-md font-sans">
-            Completed web applications with live deployments alongside ongoing automation workflows clearly labeled by development status.
-          </div>
+          <p className="text-sm text-[var(--text-secondary)] max-w-md">
+            Seven deployed React &amp; TypeScript applications alongside self-hosted Docker + n8n automation experiments.
+          </p>
         </div>
 
-        {/* Filter Bar & Search */}
+        {/* Category Filter Tabs & Search */}
         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
-          <div className="flex items-center gap-1.5 p-1 bg-zinc-100 dark:bg-white/5 rounded-xl border border-zinc-200 dark:border-white/10 overflow-x-auto no-scrollbar">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-3 py-1.5 text-xs font-mono uppercase tracking-wider rounded-lg transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-                  selectedCategory === cat
-                    ? 'bg-blue-600 text-white shadow-sm font-semibold'
-                    : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+          <div
+            className="flex items-center gap-1 p-1 rounded-xl border border-[var(--border-hairline)] bg-[var(--bg-surface)] overflow-x-auto no-scrollbar"
+            role="tablist"
+            aria-label="Project categories"
+          >
+            {categories.map((cat) => {
+              const active = selectedCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  type="button"
+                  role="tab"
+                  aria-selected={active}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`min-h-[44px] px-3.5 py-2 rounded-lg text-xs font-medium whitespace-nowrap shrink-0 transition-colors duration-150 cursor-pointer ${
+                    active
+                      ? 'text-[var(--accent-fg)] shadow-sm'
+                      : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                  }`}
+                  style={active ? { backgroundColor: 'var(--accent)' } : undefined}
+                >
+                  {cat}
+                </button>
+              );
+            })}
           </div>
 
-          {/* Responsive Search Field (safe at 320px) */}
           <div className="relative w-full md:w-64 shrink-0">
-            <Search className="w-3.5 h-3.5 text-zinc-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <Search className="w-4 h-4 text-[var(--text-muted)] absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search projects or tech..."
+              placeholder="Filter by tech or title..."
               aria-label="Search projects by name or technology"
-              className="w-full pl-9 pr-8 py-2 bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-xl text-xs font-mono text-zinc-900 dark:text-white placeholder:text-zinc-500 dark:placeholder:text-zinc-400 focus:outline-none focus:border-blue-500 transition-colors"
+              className="min-h-[44px] w-full pl-10 pr-11 py-2 rounded-xl border border-[var(--border-hairline)] bg-[var(--bg-surface)] text-xs font-mono text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] transition-colors duration-150"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery('')}
-                aria-label="Clear search query"
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-xs text-zinc-500 hover:text-zinc-800 dark:hover:text-white cursor-pointer"
+                aria-label="Clear project search"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 text-xs text-[var(--text-secondary)] hover:text-[var(--text-primary)] cursor-pointer"
               >
                 ✕
               </button>
@@ -92,11 +106,11 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
           </div>
         </div>
 
-        {/* Projects Grid */}
+        {/* Projects Grid (1st item featured larger on desktop when multiple results exist) */}
         {filteredProjects.length === 0 ? (
-          <div className="p-10 rounded-2xl border border-zinc-200 dark:border-white/10 bg-zinc-50 dark:bg-zinc-900/40 text-center space-y-3">
-            <p className="text-sm text-zinc-700 dark:text-zinc-300 font-sans">
-              No projects match &ldquo;{searchQuery}&rdquo; in {selectedCategory}.
+          <div className="rounded-2xl border border-[var(--border-hairline)] bg-[var(--bg-surface)] p-10 text-center space-y-4">
+            <p className="text-sm text-[var(--text-secondary)]">
+              No projects match &ldquo;{searchQuery}&rdquo; under {selectedCategory}.
             </p>
             <button
               type="button"
@@ -104,86 +118,100 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
                 setSelectedCategory('All');
                 setSearchQuery('');
               }}
-              className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-mono cursor-pointer"
+              className="min-h-[44px] px-5 py-2.5 rounded-lg text-xs font-medium text-[var(--accent-fg)] cursor-pointer"
+              style={{ backgroundColor: 'var(--accent)' }}
             >
               Reset Filters
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
-            {filteredProjects.map((project) => {
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {filteredProjects.map((project, index) => {
+              const isFeatured = index === 0 && filteredProjects.length > 1;
               const isCompleted = project.status === 'Completed';
-              const isPlanned = project.status === 'Planned';
 
               return (
-                <article
+                <ScrollReveal
                   key={project.id}
-                  className="group flex flex-col justify-between bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-white/10 rounded-2xl overflow-hidden hover:border-blue-500/50 hover:shadow-lg transition-all duration-300"
+                  delay={Math.min(index, 4) * 60}
+                  direction="up"
+                  className={isFeatured ? 'md:col-span-2' : ''}
                 >
-                  {/* Visual Cover Header */}
-                  <div className="relative aspect-[16/10] overflow-hidden bg-zinc-900">
-                    <img
-                      src={project.coverImage}
-                      alt={`${project.name} preview banner`}
-                      loading="lazy"
-                      decoding="async"
-                      className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 filter brightness-90"
-                      referrerPolicy="no-referrer"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/35 to-transparent" />
-
-                    {/* Status Indicator */}
-                    <div className="absolute top-3 left-3">
-                      <span
-                        className={`px-2.5 py-1 text-[11px] font-mono uppercase tracking-wider rounded-md font-semibold inline-flex items-center gap-1.5 shadow-sm ${
-                          isCompleted
-                            ? 'bg-emerald-600 text-white'
-                            : isPlanned
-                            ? 'bg-zinc-700 text-white'
-                            : 'bg-amber-600 text-white'
-                        }`}
-                      >
-                        {isCompleted ? (
-                          <CheckCircle2 className="w-3 h-3 shrink-0" />
-                        ) : isPlanned ? (
-                          <Calendar className="w-3 h-3 shrink-0" />
-                        ) : (
-                          <Clock className="w-3 h-3 shrink-0" />
-                        )}
-                        <span>{project.status}</span>
-                      </span>
+                  <article
+                    className={`group h-full rounded-2xl border border-[var(--border-hairline)] bg-[var(--bg-surface)] overflow-hidden transition-all duration-200 hover:-translate-y-1 hover:border-[var(--accent)] hover:shadow-[0_14px_34px_-14px_var(--accent-glow)] ${
+                      isFeatured ? 'grid grid-cols-1 lg:grid-cols-12' : 'flex flex-col'
+                    }`}
+                  >
+                    {/* Cover Image Slot (with aspect + gradient fallback container) */}
+                    <div
+                      className={`relative overflow-hidden bg-[var(--bg-subtle)] ${
+                        isFeatured
+                          ? 'lg:col-span-6 aspect-[16/10] lg:aspect-auto lg:min-h-[300px]'
+                          : 'aspect-[16/10]'
+                      }`}
+                    >
+                      <img
+                        src={project.coverImage}
+                        alt={`${project.name} application interface preview`}
+                        width={800}
+                        height={500}
+                        loading={index === 0 ? 'eager' : 'lazy'}
+                        decoding="async"
+                        referrerPolicy="no-referrer"
+                        className="w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.03]"
+                      />
+                      <div
+                        aria-hidden="true"
+                        className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent"
+                      />
+                      <div className="absolute bottom-3 left-4 font-mono text-xs text-zinc-100">
+                        {isFeatured ? 'Featured Build' : project.category}
+                      </div>
                     </div>
 
-                    <div className="absolute bottom-3 left-4 text-xs font-mono text-zinc-200">
-                      {project.category}
-                    </div>
-                  </div>
+                    {/* Card Details */}
+                    <div
+                      className={`p-6 flex flex-col justify-between space-y-5 ${
+                        isFeatured ? 'lg:col-span-6 lg:p-8' : 'flex-1'
+                      }`}
+                    >
+                      <div className="space-y-3">
+                        {/* Unboxed Clean Metadata Line */}
+                        <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-[var(--text-muted)]">
+                          <span className="inline-flex items-center gap-1.5 text-[var(--text-primary)] font-medium">
+                            {isCompleted ? (
+                              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                            ) : (
+                              <Clock className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                            )}
+                            <span>{project.status}</span>
+                          </span>
+                          <span aria-hidden="true">·</span>
+                          <span>{project.category}</span>
+                        </div>
 
-                  {/* Card Body */}
-                  <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
-                    <div className="space-y-2">
-                      <h3 className="font-heading font-bold text-xl text-zinc-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                        {project.name}
-                      </h3>
-                      <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 font-sans leading-relaxed line-clamp-3">
-                        {project.description}
-                      </p>
-                    </div>
+                        <h3 className="font-heading font-bold text-xl sm:text-2xl text-[var(--text-primary)] group-hover:text-[var(--accent-text)] transition-colors duration-150">
+                          {project.name}
+                        </h3>
 
-                    {/* Tech Stack & Actions */}
-                    <div className="space-y-3 pt-2">
-                      <div className="text-xs font-mono text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                        {project.techStack.join(' · ')}
+                        <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
+                          {project.description}
+                        </p>
+
+                        <div className="pt-1 font-mono text-xs text-[var(--text-muted)] leading-relaxed">
+                          {project.techStack.join(' · ')}
+                        </div>
                       </div>
 
-                      <div className="pt-3 border-t border-zinc-100 dark:border-white/5 flex items-center justify-between gap-2 flex-wrap">
+                      {/* Actions Row (>= 44px touch targets) */}
+                      <div className="pt-4 border-t border-[var(--border-hairline)] flex flex-wrap items-center justify-between gap-2">
                         <button
                           type="button"
                           onClick={() => onSelectProject(project)}
-                          className="text-xs font-heading font-semibold text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-1 transition-colors cursor-pointer"
+                          className="min-h-[44px] px-2 -ml-2 inline-flex items-center gap-1 text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-150 cursor-pointer"
                         >
-                          <Info className="w-3.5 h-3.5" />
-                          <span>Details</span>
+                          <span>Case Details</span>
+                          <ArrowUpRight className="w-3.5 h-3.5" />
                         </button>
 
                         <div className="flex items-center gap-2">
@@ -192,9 +220,9 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
                               href={project.githubUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="p-1.5 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/10 rounded-lg transition-colors"
-                              title="View GitHub profile repositories"
-                              aria-label={`View GitHub profile for ${project.name}`}
+                              aria-label={`View GitHub repository for ${project.name}`}
+                              title="GitHub Repository"
+                              className="min-w-[44px] min-h-[44px] inline-flex items-center justify-center rounded-lg border border-[var(--border-hairline)] bg-[var(--bg-elevated)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:border-[var(--border-strong)] transition-colors duration-150"
                             >
                               <Github className="w-4 h-4" />
                             </a>
@@ -205,26 +233,26 @@ export const Projects: React.FC<ProjectsProps> = ({ onSelectProject }) => {
                               href={project.liveUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="px-3 py-1.5 text-xs font-mono uppercase tracking-wider bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center gap-1.5 shadow-sm font-semibold whitespace-nowrap"
-                              title={`Open live app: ${project.liveUrl}`}
-                              aria-label={`Launch Live Demo for ${project.name}`}
+                              aria-label={`Open live deployment for ${project.name}`}
+                              className="min-h-[44px] px-4 py-2 rounded-lg text-xs font-medium text-[var(--accent-fg)] inline-flex items-center gap-1.5 transition-opacity duration-150 hover:opacity-90 whitespace-nowrap"
+                              style={{ backgroundColor: 'var(--accent)' }}
                             >
-                              <span>Live Demo</span>
-                              <ExternalLink className="w-3 h-3" />
+                              <span>Live</span>
+                              <ExternalLink className="w-3.5 h-3.5" />
                             </a>
                           ) : (
                             <span
-                              className="px-2.5 py-1.5 text-[11px] font-mono bg-zinc-100 dark:bg-white/5 text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-white/10 rounded-lg whitespace-nowrap"
-                              title={project.demoNote || 'No public hosted demo available'}
+                              className="min-h-[44px] px-3.5 py-2 rounded-lg border border-[var(--border-hairline)] bg-[var(--bg-subtle)] text-xs font-mono text-[var(--text-muted)] inline-flex items-center whitespace-nowrap"
+                              title={project.demoNote || 'Runs locally via Docker'}
                             >
-                              Local / No Demo
+                              Local Only
                             </span>
                           )}
                         </div>
                       </div>
                     </div>
-                  </div>
-                </article>
+                  </article>
+                </ScrollReveal>
               );
             })}
           </div>
